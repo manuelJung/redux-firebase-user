@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel src -d build",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "tape -r babel-register src/**/*.spec.js src/**/**/*.spec.js | tap-spec",
     "prepublish": "npm run build",
     "release": "np"
   },
@@ -40,6 +40,10 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "np": "^2.13.1"
+    "babel-register": "^6.24.1",
+    "colortape": "^0.1.2",
+    "np": "^2.13.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
   }
 }
