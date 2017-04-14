@@ -5,9 +5,8 @@ export const fetchLogoutRequest = () => ({
   type: t.FETCH_LOGOUT_REQUEST,
 })
 
-export const fetchLogoutSuccess = (payload) => ({
-  type: t.FETCH_LOGOUT_SUCCESS,
-  payload
+export const fetchLogoutSuccess = () => ({
+  type: t.FETCH_LOGOUT_SUCCESS
 })
 
 export const fetchLogoutFailure = (error) => ({
@@ -24,7 +23,7 @@ export default () => dispatch => {
   
   return auth.signOut()
     .then(response => {
-      dispatch(fetchLogoutSuccess(response))
+      dispatch(fetchLogoutSuccess())
       return response
     })
     .catch(error => {
