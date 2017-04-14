@@ -1,0 +1,38 @@
+{
+  "name": "redux-firebase-user",
+  "version": "0.0.0",
+  "description": "User Module for a react-redux + firebase application",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "babel src -d build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuelJung/redux-firebase-user.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "firebase",
+    "user"
+  ],
+  "author": "Manuel Jung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manuelJung/redux-firebase-user/issues"
+  },
+  "homepage": "https://github.com/manuelJung/redux-firebase-user#readme",
+  "dependencies": {
+    "react": "^15.5.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1"
+  }
+}
