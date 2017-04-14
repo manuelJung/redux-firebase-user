@@ -73,7 +73,7 @@ export const getLogoutFetchError = (...args) => mapReducerKey(s.logoutHandler.ge
 // --------------------------------
 
 /**
- * returns whether or not the user is currently signingup
+ * returns whether or not the user is currently signing up
  * @return bool
  */
 export const isFetchingSignup = (...args) => mapReducerKey(s.signupHandler.isFetching, ...args)
