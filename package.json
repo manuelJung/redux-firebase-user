@@ -5,11 +5,12 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel src -d build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "prepublish": "npm run build"
   },
   "babel": {
     "presets": [
-      "latest"
+      "react", "latest", "stage-0"
     ]
   },
   "repository": {
@@ -33,6 +34,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-latest": "^6.24.1"
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
   }
 }
