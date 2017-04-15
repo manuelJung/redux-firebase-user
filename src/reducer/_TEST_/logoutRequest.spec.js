@@ -1,16 +1,15 @@
 import test from 'tape'
-import reducer, { selectors, defaultState } from '../loginHandler'
-import { fetchLoginRequest, fetchLoginFailure, fetchLoginSuccess } from '../../actions/login'
+import reducer, { selectors, defaultState } from '../logoutRequest'
+import { fetchLogoutRequest, fetchLogoutFailure, fetchLogoutSuccess } from '../../actions/logout'
 
 
-
-test('reducer => loginHandler => FETCH_LOGIN_REQUEST', t => {
+test('reducer => logoutRequest => FETCH_LOGOUT_REQUEST', t => {
     var state = {
         error: "some error",
         isFetching: false,
         fetchFailed: true
     }
-    var action = fetchLoginRequest("method")
+    var action = fetchLogoutRequest()
     var newState = reducer(state, action)
 
     t.is(newState.isFetching, true,
@@ -28,13 +27,13 @@ test('reducer => loginHandler => FETCH_LOGIN_REQUEST', t => {
     t.end()
 })
 
-test('reducer => loginHandler => FETCH_LOGIN_FAILURE', t => {
+test('reducer => logoutRequest => FETCH_LOGOUT_FAILURE', t => {
     var state = {
         isFetching: true,
         fetchFailed: false,
         error: null
     }
-    var action = fetchLoginFailure("error", "method")
+    var action = fetchLogoutFailure("error")
     var newState = reducer(state, action)
 
     t.is(newState.isFetching, false,
@@ -52,13 +51,13 @@ test('reducer => loginHandler => FETCH_LOGIN_FAILURE', t => {
     t.end()
 })
 
-test('reducer => loginHandler => FETCH_LOGIN_SUCCESS', t => {
+test('reducer => logoutRequest => FETCH_LOGOUT_SUCCESS', t => {
     var state = {
         isFetching: true,
         fetchFailed: false,
         error: null
     }
-    var action = fetchLoginSuccess("payload", "method")
+    var action = fetchLogoutSuccess()
     var newState = reducer(state, action)
 
     t.is(newState.isFetching, false,

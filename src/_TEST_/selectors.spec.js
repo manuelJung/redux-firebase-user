@@ -45,7 +45,7 @@ test('selector => isLoggedIn', t => {
 
 test('selector => isFetchingLogin', t => {
     var state = { user: {
-        loginHandler: { isFetching: true }
+        loginRequest: { isFetching: true }
     }}
     var selection = selectors.isFetchingLogin(state)
 
@@ -54,7 +54,7 @@ test('selector => isFetchingLogin', t => {
     )
 
     var state = { user: {
-        loginHandler: { isFetching: false }
+        loginRequest: { isFetching: false }
     }}
     selection = selectors.isFetchingLogin(state)
 
@@ -67,7 +67,7 @@ test('selector => isFetchingLogin', t => {
 
 test("selector => loginFetchFailed", t => {
     var state = { user: {
-        loginHandler: { fetchFailed: true }
+        loginRequest: { fetchFailed: true }
     }}
     var selection = selectors.loginFetchFailed(state)
 
@@ -76,7 +76,7 @@ test("selector => loginFetchFailed", t => {
     )
 
     state = { user: {
-        loginHandler: { fetchFailed: false }
+        loginRequest: { fetchFailed: false }
     }}
     selection = selectors.loginFetchFailed(state)
 
@@ -89,7 +89,7 @@ test("selector => loginFetchFailed", t => {
 
 test("selector => getLoginFetchError", t => {
     var state = { user: {
-        loginHandler: { error: "error" }
+        loginRequest: { error: "error" }
     }}
     var selection = selectors.getLoginFetchError(state)
 
@@ -104,7 +104,7 @@ test("selector => getLoginFetchError", t => {
 
 test('selector => isFetchingLogout', t => {
     var state = { user: {
-        logoutHandler: { isFetching: true }
+        logoutRequest: { isFetching: true }
     }}
     var selection = selectors.isFetchingLogout(state)
 
@@ -113,7 +113,7 @@ test('selector => isFetchingLogout', t => {
     )
 
     var state = { user: {
-        logoutHandler: { isFetching: false }
+        logoutRequest: { isFetching: false }
     }}
     selection = selectors.isFetchingLogout(state)
 
@@ -126,7 +126,7 @@ test('selector => isFetchingLogout', t => {
 
 test("selector => logoutFetchFailed", t => {
     var state = { user: {
-        logoutHandler: { fetchFailed: true }
+        logoutRequest: { fetchFailed: true }
     }}
     var selection = selectors.logoutFetchFailed(state)
 
@@ -135,7 +135,7 @@ test("selector => logoutFetchFailed", t => {
     )
 
     state = { user: {
-        logoutHandler: { fetchFailed: false }
+        logoutRequest: { fetchFailed: false }
     }}
     selection = selectors.logoutFetchFailed(state)
 
@@ -148,7 +148,7 @@ test("selector => logoutFetchFailed", t => {
 
 test("selector => getLogoutFetchError", t => {
     var state = { user: {
-        logoutHandler: { error: "error" }
+        logoutRequest: { error: "error" }
     }}
     var selection = selectors.getLogoutFetchError(state)
 
@@ -163,7 +163,7 @@ test("selector => getLogoutFetchError", t => {
 
 test('selector => isFetchingSignup', t => {
     var state = { user: {
-        signupHandler: { isFetching: true }
+        signupRequest: { isFetching: true }
     }}
     var selection = selectors.isFetchingSignup(state)
 
@@ -172,7 +172,7 @@ test('selector => isFetchingSignup', t => {
     )
 
     var state = { user: {
-        signupHandler: { isFetching: false }
+        signupRequest: { isFetching: false }
     }}
     selection = selectors.isFetchingSignup(state)
 
@@ -185,7 +185,7 @@ test('selector => isFetchingSignup', t => {
 
 test("selector => signupFetchFailed", t => {
     var state = { user: {
-        signupHandler: { fetchFailed: true }
+        signupRequest: { fetchFailed: true }
     }}
     var selection = selectors.signupFetchFailed(state)
 
@@ -194,7 +194,7 @@ test("selector => signupFetchFailed", t => {
     )
 
     state = { user: {
-        signupHandler: { fetchFailed: false }
+        signupRequest: { fetchFailed: false }
     }}
     selection = selectors.signupFetchFailed(state)
 
@@ -207,7 +207,7 @@ test("selector => signupFetchFailed", t => {
 
 test("selector => getSignupFetchError", t => {
     var state = { user: {
-        signupHandler: { error: "error" }
+        signupRequest: { error: "error" }
     }}
     var selection = selectors.getSignupFetchError(state)
 

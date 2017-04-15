@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import AbstractAuthOButton from './AbstractAuthOButton'
-import withLoginHandler from '../hocs/withLoginHandler'
+import withLoginRequest from '../hocs/withLoginRequest'
 
 var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.8 28.6-36 -12.6 7.5-26.5 12.9-41.3 15"
                   + ".8 -11.9-12.6-28.8-20.6-47.5-20.6 -42 0-72.9 39.2-63.4 79.9 -54.1-2.7-102.1-28.6-134.2-68 -17 29"
@@ -10,8 +10,8 @@ var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.
 
 
 export const TwitterAuthOButton = ({
-  loginHandler: { isFetching },
-  // loginHandlerActions: { loginWithGoogle },
+  loginRequest: { isFetching },
+  // loginRequestActions: { loginWithGoogle },
   background,
   color,
   size,
@@ -31,16 +31,16 @@ export const TwitterAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginHandler(TwitterAuthOButton)
+export default withLoginRequest(TwitterAuthOButton)
 
 TwitterAuthOButton.propTypes = {
-  // injected by LoginHandler
-  loginHandler: PropTypes.shape({
+  // injected by LoginRequest
+  loginRequest: PropTypes.shape({
     isFetching: PropTypes.bool.isRequired
   }).isRequired,
   
-  // injected by LoginHandler
-  // loginHandlerActions: PropTypes.shape({
+  // injected by LoginRequest
+  // loginRequestActions: PropTypes.shape({
   //   loginWithGoogle: PropTypes.func.isRequired
   // }).isRequired,
   

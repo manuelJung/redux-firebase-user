@@ -3,7 +3,6 @@ import config from './config'
 
 const mapReducerKey = (selector, state, ...rest) => selector(state[config.getConfig().reducerKey], ...rest)
 
-
 // --------------------------------
 // USER
 // --------------------------------
@@ -30,19 +29,19 @@ export const isLoggedIn = (...args) => mapReducerKey(s.isLoggedIn, ...args)
  * returns whether or not the user is currently fetched
  * @return bool
  */
-export const isFetchingLogin = (...args) => mapReducerKey(s.loginHandler.isFetching, ...args)
+export const isFetchingLogin = (...args) => mapReducerKey(s.loginRequest.isFetching, ...args)
 
 /**
- * returns whether or not the last user fetch returned a network error
+ * returns whether or not the last user fetch returned a error
  * @return bool
  */
-export const loginFetchFailed = (...args) => mapReducerKey(s.loginHandler.fetchFailed, ...args)
+export const loginFetchFailed = (...args) => mapReducerKey(s.loginRequest.fetchFailed, ...args)
 
 /**
- * returns the error message, if the last user fetch returns a network error
+ * returns the error message, if the last user fetch returns a error
  * @return string
  */
-export const getLoginFetchError = (...args) => mapReducerKey(s.loginHandler.getError, ...args)
+export const getLoginFetchError = (...args) => mapReducerKey(s.loginRequest.getError, ...args)
 
 
 // --------------------------------
@@ -53,19 +52,19 @@ export const getLoginFetchError = (...args) => mapReducerKey(s.loginHandler.getE
  * returns whether or not the user is currently logging out
  * @return bool
  */
-export const isFetchingLogout = (...args) => mapReducerKey(s.logoutHandler.isFetching, ...args)
+export const isFetchingLogout = (...args) => mapReducerKey(s.logoutRequest.isFetching, ...args)
 
 /**
- * returns whether or not the last user logout returned a network error
+ * returns whether or not the last user logout returned a error
  * @return bool
  */
-export const logoutFetchFailed = (...args) => mapReducerKey(s.logoutHandler.fetchFailed, ...args)
+export const logoutFetchFailed = (...args) => mapReducerKey(s.logoutRequest.fetchFailed, ...args)
 
 /**
- * returns the error message, if the last user logout returns a network error
+ * returns the error message, if the last user logout returns a error
  * @return string
  */
-export const getLogoutFetchError = (...args) => mapReducerKey(s.logoutHandler.getError, ...args)
+export const getLogoutFetchError = (...args) => mapReducerKey(s.logoutRequest.getError, ...args)
 
 
 // --------------------------------
@@ -76,16 +75,16 @@ export const getLogoutFetchError = (...args) => mapReducerKey(s.logoutHandler.ge
  * returns whether or not the user is currently signing up
  * @return bool
  */
-export const isFetchingSignup = (...args) => mapReducerKey(s.signupHandler.isFetching, ...args)
+export const isFetchingSignup = (...args) => mapReducerKey(s.signupRequest.isFetching, ...args)
 
 /**
- * returns whether or not the last user signup returned a network error
+ * returns whether or not the last user signup returned a error
  * @return bool
  */
-export const signupFetchFailed = (...args) => mapReducerKey(s.signupHandler.fetchFailed, ...args)
+export const signupFetchFailed = (...args) => mapReducerKey(s.signupRequest.fetchFailed, ...args)
 
 /**
- * returns the error message, if the last user signup returns a network error
+ * returns the error message, if the last user signup returns a error
  * @return string
  */
-export const getSignupFetchError = (...args) => mapReducerKey(s.signupHandler.getError, ...args)
+export const getSignupFetchError = (...args) => mapReducerKey(s.signupRequest.getError, ...args)

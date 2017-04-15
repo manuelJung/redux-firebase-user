@@ -1,11 +1,11 @@
 import test from 'tape'
-import reducer, { selectors, defaultState } from '../signupHandler'
+import reducer, { selectors, defaultState } from '../signupRequest'
 import { fetchSignupRequest, fetchSignupFailure, fetchSignupSuccess } from '../../actions/signup'
 
 
 
 
-test('reducer => signupHandler => FETCH_SIGNUP_REQUEST', t => {
+test('reducer => signupRequest => FETCH_SIGNUP_REQUEST', t => {
     var state = {
         error: "some error",
         isFetching: false,
@@ -29,7 +29,7 @@ test('reducer => signupHandler => FETCH_SIGNUP_REQUEST', t => {
     t.end()
 })
 
-test('reducer => signupHandler => FETCH_SIGNUP_FAILURE', t => {
+test('reducer => signupRequest => FETCH_SIGNUP_FAILURE', t => {
     var state = {
         isFetching: true,
         fetchFailed: false,
@@ -53,7 +53,7 @@ test('reducer => signupHandler => FETCH_SIGNUP_FAILURE', t => {
     t.end()
 })
 
-test('reducer => signupHandler => FETCH_SIGNUP_SUCCESS', t => {
+test('reducer => signupRequest => FETCH_SIGNUP_SUCCESS', t => {
     var state = {
         isFetching: true,
         fetchFailed: false,

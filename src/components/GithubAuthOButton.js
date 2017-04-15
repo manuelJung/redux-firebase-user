@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import AbstractAuthOButton from './AbstractAuthOButton'
-import withLoginHandler from '../hocs/withLoginHandler'
+import withLoginRequest from '../hocs/withLoginRequest'
 
 var githubVector = "M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 127.1 176.4 9.3 1.7 12.3-4 12.3-8.9V389"
                  + ".4c-51.7 11.3-62.5-21.9-62.5-21.9 -8.4-21.5-20.6-27.2-20.6-27.2 -16.9-11.5 1.3-11.3 1.3-11.3 18.7 1"
@@ -12,8 +12,8 @@ var githubVector = "M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 
 
 
 export const GoogleAuthOButton = ({
-  loginHandler: { isFetching },
-  // loginHandlerActions: { loginWithGoogle },
+  loginRequest: { isFetching },
+  // loginRequestActions: { loginWithGoogle },
   background,
   color,
   size,
@@ -33,16 +33,16 @@ export const GoogleAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginHandler(GoogleAuthOButton)
+export default withLoginRequest(GoogleAuthOButton)
 
 GoogleAuthOButton.propTypes = {
-  // injected by LoginHandler
-  loginHandler: PropTypes.shape({
+  // injected by LoginRequest
+  loginRequest: PropTypes.shape({
     isFetching: PropTypes.bool.isRequired
   }).isRequired,
   
-  // injected by LoginHandler
-  // loginHandlerActions: PropTypes.shape({
+  // injected by LoginRequest
+  // loginRequestActions: PropTypes.shape({
   //   loginWithGoogle: PropTypes.func.isRequired
   // }).isRequired,
   

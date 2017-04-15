@@ -1,15 +1,15 @@
 import * as t from '../actionTypes'
 
-import loginHandler, * as fromLoginHandler from './loginHandler'
-import signupHandler, * as fromSignupHandler from './signupHandler'
-import logoutHandler, * as fromLogoutHandler from './logoutHandler'
+import loginRequest, * as fromLoginRequest from './loginRequest'
+import signupRequest, * as fromSignupRequest from './signupRequest'
+import logoutRequest, * as fromLogoutRequest from './logoutRequest'
 
 
 const defaultState = {
   user          : null,
-  loginHandler  : undefined,
-  signupHandler : undefined,
-  logoutHandler : undefined
+  loginRequest  : undefined,
+  signupRequest : undefined,
+  logoutRequest : undefined
 }
 
 export const updaters = {
@@ -23,30 +23,30 @@ export default function reducer (state = defaultState, action) {
     // case t.FETCH_LOGIN_SUCCESS: return { 
     //   ...state, 
     //   user         : action.payload,
-    //   loginHandler : loginHandler(state.loginHandler, action)
+    //   loginRequest : loginRequest(state.loginRequest, action)
     // }
     
     // case t.FETCH_LOGOUT_SUCCESS: return {
     //   ...state, 
     //   user          : null,
-    //   logoutHandler : loginHandler(state.loginHandler, action)
+    //   logoutRequest : loginRequest(state.loginRequest, action)
     // }
     
     case t.FETCH_LOGIN_SUCCESS: return { 
       ...updaters.setUser(state, action.payload),
-      loginHandler : loginHandler(state.loginHandler, action)
+      loginRequest : loginRequest(state.loginRequest, action)
     }
     
     case t.FETCH_LOGOUT_SUCCESS: return {
       ...updaters.clearUser(state),
-      logoutHandler : loginHandler(state.loginHandler, action)
+      logoutRequest : loginRequest(state.loginRequest, action)
     }
     
     default: return {
       ...state,
-      loginHandler  : loginHandler(state.loginHandler, action),
-      logoutHandler : logoutHandler(state.logoutHandler, action),
-      signupHandler : signupHandler(state.signupHandler, action)
+      loginRequest  : loginRequest(state.loginRequest, action),
+      logoutRequest : logoutRequest(state.logoutRequest, action),
+      signupRequest : signupRequest(state.signupRequest, action)
     }
   }
 }
@@ -65,7 +65,7 @@ export const selectors = {
   getUser     : (state) => state.user,
   isLoggedIn  : (state) => !!state.user,
   
-  loginHandler  : mapSelectors(fromLoginHandler.selectors, 'loginHandler'),
-  logoutHandler : mapSelectors(fromLogoutHandler.selectors, 'logoutHandler'),
-  signupHandler : mapSelectors(fromSignupHandler.selectors, 'signupHandler')
+  loginRequest  : mapSelectors(fromLoginRequest.selectors, 'loginRequest'),
+  logoutRequest : mapSelectors(fromLogoutRequest.selectors, 'logoutRequest'),
+  signupRequest : mapSelectors(fromSignupRequest.selectors, 'signupRequest')
 }

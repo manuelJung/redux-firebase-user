@@ -1,26 +1,27 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import { isFetchingLogout, logoutFetchFailed, getLogoutFetchError } from '../selectors'
-import { logout as logoutAction } from '../actions'
+import { isFetchingSignup, signupFetchFailed, getSignupFetchError } from '../selectors'
+import { signup as signupAction } from '../actions'
 import config from '../config'
 
 // const mapStateToProps = state => ({
-//   logoutHandler: {
-//     isFetching  : isFetchingLogout(state),
-//     fetchFailed : logoutFetchFailed(state),
-//     fethError   : getLogoutFetchError(state),
+//   signupRequest: {
+//     isFetching  : isFetchingSignup(state),
+//     fetchFailed : signupFetchFailed(state),
+//     fetchError  : getSignupFetchError(state),
 //   }
 // })
 
 // const mapDispatchToProps = dispatch => ({
-//   logoutHandlerActions: {
-//     logout : () => dispatch(logout())
+//   signupRequestActions: {
+//     signup : (email, password) => dispatch(signup(email, password))
 //   }
 // })
 
 // export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
-export default (BaseComponent) => class WithLogoutHandler extends React.Component {
+
+export default (BaseComponent) => class WithSignupRequest extends React.Component {
   
   static contextTypes = {
     store: React.PropTypes.object
@@ -58,17 +59,17 @@ export default (BaseComponent) => class WithLogoutHandler extends React.Componen
     const state = this.context.store.getState()
     const dispatch = this.context.store.dispatch
     
-    const logout = () => dispatch(logoutAction())
+    const signup = (email, password) => dispatch(signupAction(email, password))
     
     return {
       
-      logoutHandler: {
-        isFetching  : isFetchingLogout(state),
-        fetchFailed : logoutFetchFailed(state),
-        fetchError  : getLogoutFetchError(state)
+      signupRequest: {
+        isFetching  : isFetchingSignup(state),
+        fetchFailed : signupFetchFailed(state),
+        fetchError  : getSignupFetchError(state)
       },
       
-      logoutHandlerActions: { logout },
+      signupRequestActions: { signup },
       
     }
   }

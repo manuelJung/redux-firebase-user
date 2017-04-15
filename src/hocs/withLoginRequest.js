@@ -1,27 +1,27 @@
 import React from 'react'
 // import { connect } from 'react-redux'
-import { isFetchingSignup, signupFetchFailed, getSignupFetchError } from '../selectors'
-import { signup as signupAction } from '../actions'
+import { isFetchingLogin, loginFetchFailed, getLoginFetchError } from '../selectors'
+import { login as loginAction, loginWithGoogle as loginWithGoogleAction } from '../actions'
 import config from '../config'
 
 // const mapStateToProps = state => ({
-//   signupHandler: {
-//     isFetching  : isFetchingSignup(state),
-//     fetchFailed : signupFetchFailed(state),
-//     fetchError  : getSignupFetchError(state),
+//   loginRequest: {
+//     isFetching  : isFetchingLogin(state),
+//     fetchFailed : loginFetchFailed(state),
+//     fetchError  : getLoginFetchError(state)
 //   }
 // })
 
 // const mapDispatchToProps = dispatch => ({
-//   signupHandlerActions: {
-//     signup : (email, password) => dispatch(signup(email, password))
+//   loginRequestActions: {
+//     login: (username, password) => dispatch(login(username, password)),
+//     loginWithGoogle: (options) => dispatch(loginWithGoogle(options))
 //   }
 // })
 
 // export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
-
-export default (BaseComponent) => class WithSignupHandler extends React.Component {
+export default (BaseComponent) => class WithLoginRequest extends React.Component {
   
   static contextTypes = {
     store: React.PropTypes.object
@@ -59,17 +59,18 @@ export default (BaseComponent) => class WithSignupHandler extends React.Componen
     const state = this.context.store.getState()
     const dispatch = this.context.store.dispatch
     
-    const signup = (email, password) => dispatch(signupAction(email, password))
+    const login           = (username, password) => dispatch(loginAction(username, password))
+    const loginWithGoogle = () => dispatch(loginWithGoogleAction())
     
     return {
       
-      signupHandler: {
-        isFetching  : isFetchingSignup(state),
-        fetchFailed : signupFetchFailed(state),
-        fetchError  : getSignupFetchError(state)
+      loginRequest: {
+        isFetching  : isFetchingLogin(state),
+        fetchFailed : loginFetchFailed(state),
+        fetchError  : getLoginFetchError(state)
       },
       
-      signupHandlerActions: { signup },
+      loginRequestActions: { login, loginWithGoogle },
       
     }
   }

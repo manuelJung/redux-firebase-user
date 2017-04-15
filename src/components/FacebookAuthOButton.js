@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import AbstractAuthOButton from './AbstractAuthOButton'
-import withLoginHandler from '../hocs/withLoginHandler'
+import withLoginRequest from '../hocs/withLoginRequest'
 
 var facebookVector = "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19"
                    + ".5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 "
@@ -8,8 +8,8 @@ var facebookVector = "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.
 
 
 export const FacebookAuthOButton = ({
-  loginHandler: { isFetching },
-  // loginHandlerActions: { loginWithGoogle },
+  loginRequest: { isFetching },
+  // loginRequestActions: { loginWithGoogle },
   background,
   color,
   size,
@@ -29,16 +29,16 @@ export const FacebookAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginHandler(FacebookAuthOButton)
+export default withLoginRequest(FacebookAuthOButton)
 
 FacebookAuthOButton.propTypes = {
-  // injected by LoginHandler
-  loginHandler: PropTypes.shape({
+  // injected by LoginRequest
+  loginRequest: PropTypes.shape({
     isFetching: PropTypes.bool.isRequired
   }).isRequired,
   
-  // injected by LoginHandler
-  // loginHandlerActions: PropTypes.shape({
+  // injected by LoginRequest
+  // loginRequestActions: PropTypes.shape({
   //   loginWithGoogle: PropTypes.func.isRequired
   // }).isRequired,
   
