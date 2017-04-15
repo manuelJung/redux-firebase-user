@@ -66,7 +66,7 @@ test('thunk => login (success)', t => {
     })
 })
 
-test.only('thunk => login (failure)', t => {
+test('thunk => login (failure)', t => {
 
     var { dispatchSpy, requestSpy, login } = loginMock("email", "password", "reject", "error")
     
