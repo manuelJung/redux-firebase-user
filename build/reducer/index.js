@@ -13,17 +13,17 @@ var _actionTypes = require('../actionTypes');
 
 var t = _interopRequireWildcard(_actionTypes);
 
-var _loginHandler = require('./loginHandler');
+var _loginRequest = require('./loginRequest');
 
-var fromLoginHandler = _interopRequireWildcard(_loginHandler);
+var fromLoginRequest = _interopRequireWildcard(_loginRequest);
 
-var _signupHandler = require('./signupHandler');
+var _signupRequest = require('./signupRequest');
 
-var fromSignupHandler = _interopRequireWildcard(_signupHandler);
+var fromSignupRequest = _interopRequireWildcard(_signupRequest);
 
-var _logoutHandler = require('./logoutHandler');
+var _logoutRequest = require('./logoutRequest');
 
-var fromLogoutHandler = _interopRequireWildcard(_logoutHandler);
+var fromLogoutRequest = _interopRequireWildcard(_logoutRequest);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -31,9 +31,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var defaultState = {
   user: null,
-  loginHandler: undefined,
-  signupHandler: undefined,
-  logoutHandler: undefined
+  loginRequest: undefined,
+  signupRequest: undefined,
+  logoutRequest: undefined
 };
 
 var updaters = exports.updaters = {
@@ -54,30 +54,30 @@ function reducer() {
     // case t.FETCH_LOGIN_SUCCESS: return { 
     //   ...state, 
     //   user         : action.payload,
-    //   loginHandler : loginHandler(state.loginHandler, action)
+    //   loginRequest : loginRequest(state.loginRequest, action)
     // }
 
     // case t.FETCH_LOGOUT_SUCCESS: return {
     //   ...state, 
     //   user          : null,
-    //   logoutHandler : loginHandler(state.loginHandler, action)
+    //   logoutRequest : loginRequest(state.loginRequest, action)
     // }
 
     case t.FETCH_LOGIN_SUCCESS:
       return _extends({}, updaters.setUser(state, action.payload), {
-        loginHandler: (0, fromLoginHandler.default)(state.loginHandler, action)
+        loginRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
       });
 
     case t.FETCH_LOGOUT_SUCCESS:
       return _extends({}, updaters.clearUser(state), {
-        logoutHandler: (0, fromLoginHandler.default)(state.loginHandler, action)
+        logoutRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
       });
 
     default:
       return _extends({}, state, {
-        loginHandler: (0, fromLoginHandler.default)(state.loginHandler, action),
-        logoutHandler: (0, fromLogoutHandler.default)(state.logoutHandler, action),
-        signupHandler: (0, fromSignupHandler.default)(state.signupHandler, action)
+        loginRequest: (0, fromLoginRequest.default)(state.loginRequest, action),
+        logoutRequest: (0, fromLogoutRequest.default)(state.logoutRequest, action),
+        signupRequest: (0, fromSignupRequest.default)(state.signupRequest, action)
       });
   }
 }
@@ -102,7 +102,7 @@ var selectors = exports.selectors = {
     return !!state.user;
   },
 
-  loginHandler: mapSelectors(fromLoginHandler.selectors, 'loginHandler'),
-  logoutHandler: mapSelectors(fromLogoutHandler.selectors, 'logoutHandler'),
-  signupHandler: mapSelectors(fromSignupHandler.selectors, 'signupHandler')
+  loginRequest: mapSelectors(fromLoginRequest.selectors, 'loginRequest'),
+  logoutRequest: mapSelectors(fromLogoutRequest.selectors, 'logoutRequest'),
+  signupRequest: mapSelectors(fromSignupRequest.selectors, 'signupRequest')
 };

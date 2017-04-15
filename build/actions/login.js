@@ -48,16 +48,7 @@ exports.default = function (email, password) {
     dispatch(fetchLoginRequest(method));
 
     return auth().signInWithEmailAndPassword(email, password).then(function (response) {
-      if (response.uid) {
-        dispatch(fetchLoginSuccess(response, method));
-      } else {
-        var error = {
-          code: response.code || 'auth/unkown-error',
-          message: response.message || 'An unkown Error appeard'
-        };
-        dispatch(fetchLoginFailure(error, method));
-      }
-
+      dispatch(fetchLoginSuccess(response, method));
       return response;
     }).catch(function (response) {
       var error = {
@@ -79,17 +70,8 @@ var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle() {
     dispatch(fetchLoginRequest(method));
 
     return auth().signInWithPopup(provider).then(function (response) {
-      if (response.user && response.user.uid) {
-        dispatch(fetchLoginSuccess(response, method));
-        return response.user;
-      } else {
-        var error = {
-          code: response.code || 'auth/unkown-error',
-          message: response.message || 'An unkown Error appeard'
-        };
-        dispatch(fetchLoginFailure(error, method));
-        return response;
-      }
+      dispatch(fetchLoginSuccess(response, method));
+      return response.user;
     }).catch(function (response) {
       var error = {
         code: response.code || 'auth/unkown-error',

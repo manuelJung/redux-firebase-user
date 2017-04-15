@@ -23,10 +23,9 @@ var fetchLogoutRequest = exports.fetchLogoutRequest = function fetchLogoutReques
   };
 };
 
-var fetchLogoutSuccess = exports.fetchLogoutSuccess = function fetchLogoutSuccess(payload) {
+var fetchLogoutSuccess = exports.fetchLogoutSuccess = function fetchLogoutSuccess() {
   return {
-    type: t.FETCH_LOGOUT_SUCCESS,
-    payload: payload
+    type: t.FETCH_LOGOUT_SUCCESS
   };
 };
 
@@ -45,7 +44,7 @@ exports.default = function () {
     var auth = _config2.default.getConfig().firebase.auth();
 
     return auth.signOut().then(function (response) {
-      dispatch(fetchLogoutSuccess(response));
+      dispatch(fetchLogoutSuccess());
       return response;
     }).catch(function (error) {
       dispatch(fetchLogoutFailure(error));

@@ -31,7 +31,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 // const mapStateToProps = state => ({
-//   signupHandler: {
+//   signupRequest: {
 //     isFetching  : isFetchingSignup(state),
 //     fetchFailed : signupFetchFailed(state),
 //     fetchError  : getSignupFetchError(state),
@@ -39,7 +39,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // })
 
 // const mapDispatchToProps = dispatch => ({
-//   signupHandlerActions: {
+//   signupRequestActions: {
 //     signup : (email, password) => dispatch(signup(email, password))
 //   }
 // })
@@ -51,23 +51,23 @@ exports.default = function (BaseComponent) {
   var _class, _temp2;
 
   return _temp2 = _class = function (_React$Component) {
-    _inherits(WithSignupHandler, _React$Component);
+    _inherits(WithSignupRequest, _React$Component);
 
-    function WithSignupHandler() {
+    function WithSignupRequest() {
       var _ref;
 
       var _temp, _this, _ret;
 
-      _classCallCheck(this, WithSignupHandler);
+      _classCallCheck(this, WithSignupRequest);
 
       for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithSignupHandler.__proto__ || Object.getPrototypeOf(WithSignupHandler)).call.apply(_ref, [this].concat(args))), _this), _this.unsubscribeStore = null, _this.hasMounted = false, _temp), _possibleConstructorReturn(_this, _ret);
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithSignupRequest.__proto__ || Object.getPrototypeOf(WithSignupRequest)).call.apply(_ref, [this].concat(args))), _this), _this.unsubscribeStore = null, _this.hasMounted = false, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(WithSignupHandler, [{
+    _createClass(WithSignupRequest, [{
       key: 'componentWillMount',
       value: function componentWillMount() {
         var _this2 = this;
@@ -109,13 +109,13 @@ exports.default = function (BaseComponent) {
 
         return {
 
-          signupHandler: {
+          signupRequest: {
             isFetching: (0, _selectors.isFetchingSignup)(state),
             fetchFailed: (0, _selectors.signupFetchFailed)(state),
             fetchError: (0, _selectors.getSignupFetchError)(state)
           },
 
-          signupHandlerActions: { signup: signup }
+          signupRequestActions: { signup: signup }
 
         };
       }
@@ -127,7 +127,7 @@ exports.default = function (BaseComponent) {
       }
     }]);
 
-    return WithSignupHandler;
+    return WithSignupRequest;
   }(_react2.default.Component), _class.contextTypes = {
     store: _react2.default.PropTypes.object
   }, _temp2;

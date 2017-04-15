@@ -31,16 +31,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 // const mapStateToProps = state => ({
-//   logoutHandler: {
-//     isFetching  : isFetchingLogout(state),
-//     fetchFailed : logoutFetchFailed(state),
-//     fethError   : getLogoutFetchError(state),
+//   loginRequest: {
+//     isFetching  : isFetchingLogin(state),
+//     fetchFailed : loginFetchFailed(state),
+//     fetchError  : getLoginFetchError(state)
 //   }
 // })
 
 // const mapDispatchToProps = dispatch => ({
-//   logoutHandlerActions: {
-//     logout : () => dispatch(logout())
+//   loginRequestActions: {
+//     login: (username, password) => dispatch(login(username, password)),
+//     loginWithGoogle: (options) => dispatch(loginWithGoogle(options))
 //   }
 // })
 
@@ -50,23 +51,23 @@ exports.default = function (BaseComponent) {
   var _class, _temp2;
 
   return _temp2 = _class = function (_React$Component) {
-    _inherits(WithLogoutHandler, _React$Component);
+    _inherits(WithLoginRequest, _React$Component);
 
-    function WithLogoutHandler() {
+    function WithLoginRequest() {
       var _ref;
 
       var _temp, _this, _ret;
 
-      _classCallCheck(this, WithLogoutHandler);
+      _classCallCheck(this, WithLoginRequest);
 
       for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithLogoutHandler.__proto__ || Object.getPrototypeOf(WithLogoutHandler)).call.apply(_ref, [this].concat(args))), _this), _this.unsubscribeStore = null, _this.hasMounted = false, _temp), _possibleConstructorReturn(_this, _ret);
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithLoginRequest.__proto__ || Object.getPrototypeOf(WithLoginRequest)).call.apply(_ref, [this].concat(args))), _this), _this.unsubscribeStore = null, _this.hasMounted = false, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
-    _createClass(WithLogoutHandler, [{
+    _createClass(WithLoginRequest, [{
       key: 'componentWillMount',
       value: function componentWillMount() {
         var _this2 = this;
@@ -102,19 +103,22 @@ exports.default = function (BaseComponent) {
         var state = this.context.store.getState();
         var dispatch = this.context.store.dispatch;
 
-        var logout = function logout() {
-          return dispatch((0, _actions.logout)());
+        var login = function login(username, password) {
+          return dispatch((0, _actions.login)(username, password));
+        };
+        var loginWithGoogle = function loginWithGoogle() {
+          return dispatch((0, _actions.loginWithGoogle)());
         };
 
         return {
 
-          logoutHandler: {
-            isFetching: (0, _selectors.isFetchingLogout)(state),
-            fetchFailed: (0, _selectors.logoutFetchFailed)(state),
-            fetchError: (0, _selectors.getLogoutFetchError)(state)
+          loginRequest: {
+            isFetching: (0, _selectors.isFetchingLogin)(state),
+            fetchFailed: (0, _selectors.loginFetchFailed)(state),
+            fetchError: (0, _selectors.getLoginFetchError)(state)
           },
 
-          logoutHandlerActions: { logout: logout }
+          loginRequestActions: { login: login, loginWithGoogle: loginWithGoogle }
 
         };
       }
@@ -126,7 +130,7 @@ exports.default = function (BaseComponent) {
       }
     }]);
 
-    return WithLogoutHandler;
+    return WithLoginRequest;
   }(_react2.default.Component), _class.contextTypes = {
     store: _react2.default.PropTypes.object
   }, _temp2;

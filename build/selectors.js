@@ -63,11 +63,11 @@ var isFetchingLogin = exports.isFetchingLogin = function isFetchingLogin() {
     args[_key4] = arguments[_key4];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.loginHandler.isFetching].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.loginRequest.isFetching].concat(args));
 };
 
 /**
- * returns whether or not the last user fetch returned a network error
+ * returns whether or not the last user fetch returned a error
  * @return bool
  */
 var loginFetchFailed = exports.loginFetchFailed = function loginFetchFailed() {
@@ -75,11 +75,11 @@ var loginFetchFailed = exports.loginFetchFailed = function loginFetchFailed() {
     args[_key5] = arguments[_key5];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.loginHandler.fetchFailed].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.loginRequest.fetchFailed].concat(args));
 };
 
 /**
- * returns the error message, if the last user fetch returns a network error
+ * returns the error message, if the last user fetch returns a error
  * @return string
  */
 var getLoginFetchError = exports.getLoginFetchError = function getLoginFetchError() {
@@ -87,7 +87,7 @@ var getLoginFetchError = exports.getLoginFetchError = function getLoginFetchErro
     args[_key6] = arguments[_key6];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.loginHandler.getError].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.loginRequest.getError].concat(args));
 };
 
 // --------------------------------
@@ -103,11 +103,11 @@ var isFetchingLogout = exports.isFetchingLogout = function isFetchingLogout() {
     args[_key7] = arguments[_key7];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutHandler.isFetching].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutRequest.isFetching].concat(args));
 };
 
 /**
- * returns whether or not the last user logout returned a network error
+ * returns whether or not the last user logout returned a error
  * @return bool
  */
 var logoutFetchFailed = exports.logoutFetchFailed = function logoutFetchFailed() {
@@ -115,11 +115,11 @@ var logoutFetchFailed = exports.logoutFetchFailed = function logoutFetchFailed()
     args[_key8] = arguments[_key8];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutHandler.fetchFailed].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutRequest.fetchFailed].concat(args));
 };
 
 /**
- * returns the error message, if the last user logout returns a network error
+ * returns the error message, if the last user logout returns a error
  * @return string
  */
 var getLogoutFetchError = exports.getLogoutFetchError = function getLogoutFetchError() {
@@ -127,7 +127,7 @@ var getLogoutFetchError = exports.getLogoutFetchError = function getLogoutFetchE
     args[_key9] = arguments[_key9];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutHandler.getError].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.logoutRequest.getError].concat(args));
 };
 
 // --------------------------------
@@ -135,7 +135,7 @@ var getLogoutFetchError = exports.getLogoutFetchError = function getLogoutFetchE
 // --------------------------------
 
 /**
- * returns whether or not the user is currently signingup
+ * returns whether or not the user is currently signing up
  * @return bool
  */
 var isFetchingSignup = exports.isFetchingSignup = function isFetchingSignup() {
@@ -143,11 +143,11 @@ var isFetchingSignup = exports.isFetchingSignup = function isFetchingSignup() {
     args[_key10] = arguments[_key10];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.signupHandler.isFetching].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.signupRequest.isFetching].concat(args));
 };
 
 /**
- * returns whether or not the last user signup returned a network error
+ * returns whether or not the last user signup returned a error
  * @return bool
  */
 var signupFetchFailed = exports.signupFetchFailed = function signupFetchFailed() {
@@ -155,11 +155,11 @@ var signupFetchFailed = exports.signupFetchFailed = function signupFetchFailed()
     args[_key11] = arguments[_key11];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.signupHandler.fetchFailed].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.signupRequest.fetchFailed].concat(args));
 };
 
 /**
- * returns the error message, if the last user signup returns a network error
+ * returns the error message, if the last user signup returns a error
  * @return string
  */
 var getSignupFetchError = exports.getSignupFetchError = function getSignupFetchError() {
@@ -167,5 +167,5 @@ var getSignupFetchError = exports.getSignupFetchError = function getSignupFetchE
     args[_key12] = arguments[_key12];
   }
 
-  return mapReducerKey.apply(undefined, [_reducer.selectors.signupHandler.getError].concat(args));
+  return mapReducerKey.apply(undefined, [_reducer.selectors.signupRequest.getError].concat(args));
 };

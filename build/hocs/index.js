@@ -13,30 +13,30 @@ Object.defineProperty(exports, 'withUser', {
   }
 });
 
-var _withLoginHandler = require('./withLoginHandler');
+var _withLoginRequest = require('./withLoginRequest');
 
-Object.defineProperty(exports, 'withLoginHandler', {
+Object.defineProperty(exports, 'withLoginRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLoginHandler).default;
+    return _interopRequireDefault(_withLoginRequest).default;
   }
 });
 
-var _withSignupHandler = require('./withSignupHandler');
+var _withSignupRequest = require('./withSignupRequest');
 
-Object.defineProperty(exports, 'withSignupHandler', {
+Object.defineProperty(exports, 'withSignupRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withSignupHandler).default;
+    return _interopRequireDefault(_withSignupRequest).default;
   }
 });
 
-var _withLogoutHandler = require('./withLogoutHandler');
+var _withLogoutRequest = require('./withLogoutRequest');
 
-Object.defineProperty(exports, 'withLogoutHandler', {
+Object.defineProperty(exports, 'withLogoutRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLogoutHandler).default;
+    return _interopRequireDefault(_withLogoutRequest).default;
   }
 });
 
