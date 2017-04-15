@@ -28,17 +28,7 @@ export default (email, password) => dispatch => {
   
   return auth().signInWithEmailAndPassword(email, password)
     .then(response => {
-      if (response.uid) {
-        dispatch(fetchLoginSuccess(response, method))
-      }
-      else {
-        var error = {
-          code    : response.code || 'auth/unkown-error',
-          message : response.message || 'An unkown Error appeard'
-        }
-        dispatch(fetchLoginFailure(error, method))
-      }
-      
+      dispatch(fetchLoginSuccess(response, method))
       return response
     })
     .catch(response => {
@@ -60,19 +50,8 @@ export const loginWithGoogle = () => dispatch => {
   
   return auth().signInWithPopup(provider)
     .then(response => {
-      if (response.user && response.user.uid) {
-        dispatch(fetchLoginSuccess(response, method))
-        return response.user
-      }
-      else {
-        var error = {
-          code    : response.code || 'auth/unkown-error',
-          message : response.message || 'An unkown Error appeard'
-        }
-        dispatch(fetchLoginFailure(error, method))
-        return response
-      }
-      
+      dispatch(fetchLoginSuccess(response, method))
+      return response.user
     })
     .catch(response => {
       var error = {
