@@ -1,19 +1,6 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { isLoggedIn, getUser } from '../selectors'
 import config from '../config'
-
-// const mapStateToProps = state => ({
-//   user: {
-//     isLoggedIn: isLoggedIn(state),
-//     data: getUser(state)
-//   }
-// })
-
-// const mapDispatchToProps = {
-// }
-
-// export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
 
 export default (BaseComponent) => class WithLoginForm extends React.Component {

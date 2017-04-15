@@ -1,24 +1,9 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { isFetchingLogout, logoutFetchFailed, getLogoutFetchError } from '../selectors'
 import { logout as logoutAction } from '../actions'
 import config from '../config'
 
-// const mapStateToProps = state => ({
-//   logoutRequest: {
-//     isFetching  : isFetchingLogout(state),
-//     fetchFailed : logoutFetchFailed(state),
-//     fethError   : getLogoutFetchError(state),
-//   }
-// })
 
-// const mapDispatchToProps = dispatch => ({
-//   logoutRequestActions: {
-//     logout : () => dispatch(logout())
-//   }
-// })
-
-// export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
 export default (BaseComponent) => class WithLogoutRequest extends React.Component {
   

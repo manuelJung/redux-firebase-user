@@ -1,25 +1,8 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { isFetchingLogin, loginFetchFailed, getLoginFetchError } from '../selectors'
 import { login as loginAction, loginWithGoogle as loginWithGoogleAction } from '../actions'
 import config from '../config'
 
-// const mapStateToProps = state => ({
-//   loginRequest: {
-//     isFetching  : isFetchingLogin(state),
-//     fetchFailed : loginFetchFailed(state),
-//     fetchError  : getLoginFetchError(state)
-//   }
-// })
-
-// const mapDispatchToProps = dispatch => ({
-//   loginRequestActions: {
-//     login: (username, password) => dispatch(login(username, password)),
-//     loginWithGoogle: (options) => dispatch(loginWithGoogle(options))
-//   }
-// })
-
-// export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
 export default (BaseComponent) => class WithLoginRequest extends React.Component {
   

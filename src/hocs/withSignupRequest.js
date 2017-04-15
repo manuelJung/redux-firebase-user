@@ -1,24 +1,8 @@
 import React from 'react'
-// import { connect } from 'react-redux'
 import { isFetchingSignup, signupFetchFailed, getSignupFetchError } from '../selectors'
 import { signup as signupAction } from '../actions'
 import config from '../config'
 
-// const mapStateToProps = state => ({
-//   signupRequest: {
-//     isFetching  : isFetchingSignup(state),
-//     fetchFailed : signupFetchFailed(state),
-//     fetchError  : getSignupFetchError(state),
-//   }
-// })
-
-// const mapDispatchToProps = dispatch => ({
-//   signupRequestActions: {
-//     signup : (email, password) => dispatch(signup(email, password))
-//   }
-// })
-
-// export default (BaseComponent) => connect(mapStateToProps, mapDispatchToProps)(BaseComponent)
 
 
 export default (BaseComponent) => class WithSignupRequest extends React.Component {
