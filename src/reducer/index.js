@@ -20,18 +20,6 @@ export const updaters = {
 export default function reducer (state = defaultState, action) {
   switch (action.type) {
     
-    // case t.FETCH_LOGIN_SUCCESS: return { 
-    //   ...state, 
-    //   user         : action.payload,
-    //   loginRequest : loginRequest(state.loginRequest, action)
-    // }
-    
-    // case t.FETCH_LOGOUT_SUCCESS: return {
-    //   ...state, 
-    //   user          : null,
-    //   logoutRequest : loginRequest(state.loginRequest, action)
-    // }
-    
     case t.FETCH_LOGIN_SUCCESS: return { 
       ...updaters.setUser(state, action.payload),
       loginRequest : loginRequest(state.loginRequest, action)
@@ -40,6 +28,11 @@ export default function reducer (state = defaultState, action) {
     case t.FETCH_LOGOUT_SUCCESS: return {
       ...updaters.clearUser(state),
       logoutRequest : loginRequest(state.loginRequest, action)
+    }
+
+    case t.FETCH_SIGNUP_SUCCESS: return {
+      ...updaters.setUser(state, action.payload),
+      signupRequest : signupRequest(state.signupRequest, action)
     }
     
     default: return {

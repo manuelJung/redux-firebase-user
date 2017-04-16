@@ -29,14 +29,6 @@ export default (email, password) => dispatch => {
   return auth.createUserWithEmailAndPassword(email, password)
     .then(response => {
       dispatch(fetchSignupSuccess(email, password, response))
-      // if (response.key) {
-      //   dispatch(signupSuccess(email, password, response))
-      // }
-      // else {
-      //   dispatch(signupFailure(email, password, response))
-      // }
-      // TODO
-      document.response = response
       return response
     })
     .catch(error => {

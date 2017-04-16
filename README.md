@@ -19,17 +19,20 @@ $ npm install --save redux-firebase-user
         - [withLoginForm](#withloginform)
             - [api](#api)
             - [usage](#usage)
-        - [withLogoutButton](#withlogoutbutton)
+        - [withSignupForm](#withsignupform)
             - [api](#api-1)
             - [usage](#usage-1)
-        - [withLoginRequest](#withloginrequest)
+        - [withLogoutButton](#withlogoutbutton)
             - [api](#api-2)
+            - [usage](#usage-2)
+        - [withLoginRequest](#withloginrequest)
+            - [api](#api-3)
             - [request](#request)
         - [withLogoutRequest](#withlogoutrequest)
-            - [api](#api-3)
+            - [api](#api-4)
             - [request](#request-1)
         - [withSignupRequest](#withsignuprequest)
-            - [api](#api-4)
+            - [api](#api-5)
             - [request](#request-2)
     - [Components](#components)
         - [AuthOButtons](#authobuttons)
@@ -63,6 +66,7 @@ const store = createStore(reducer)
 ```
 
 ## HOCs
+
 
 ### withLoginForm
 
@@ -107,6 +111,53 @@ export const LoginForm = ({
 )
 
 export default withLoginForm(LoginForm)
+```
+
+
+
+### withSignupForm
+
+this hoc provides functions and component props for a signup form component
+
+#### api
+
+| name           | type   | injection                | explanation                                              |
+|----------------|--------|--------------------------|----------------------------------------------------------|
+| emailInput     | props  | props.signupFormComponent | input props for the email-input (value, onChange, placeholder, type) |
+| passwordInput  | props  | props.signupFormComponent | input props for the password-input (value, onChange, placeholder, type) |
+| submitInput    | props  | props.signupFormComponent | input props for the submit-input (onClick, type, value) |
+| submitButton   | props  | props.signupFormComponent | button props for the submit-button (onClick) |
+| clearForm      | action | props.signupFormActions   | () => clears password and email input |
+| clearPasssword | action | props.signupFormActions   | () => clears password input |
+| signup         | action | props.signupFormActions   | () => fetch signup by current value of email and password input |
+| isFetching     | prop   | props.signupForm          | bool; true if signup request is currently performing |
+| fetchFailed    | prop   | props.signupForm          | bool; true if last signup request failed |
+| fetchError     | prop   | props.signupForm          | { code: string, message: string }; holds an error if the last request failed |
+
+#### usage
+
+```javascript
+import React from 'react'
+import { hocs } from 'redux-firebase-user'
+
+const { withSignupForm } = hocs
+
+
+export const SignupForm = ({
+  signupFormComponents: { emailInput, passwordInput, submitInput },
+  signupForm: { isFetching, fetchFailed, fetchError }
+}) => (
+  <div>
+    <input {...emailInput} /><br/>
+    <input {...passwordInput} /><br/>
+    <input {...submitInput} />
+    {
+      fetchFailed && <div>{ fetchError.message }</div>
+    }
+  </div>
+)
+
+export default withSignupForm(SignupForm)
 ```
 
 ### withLogoutButton
