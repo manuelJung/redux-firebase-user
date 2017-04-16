@@ -285,10 +285,13 @@ export default LoginForm
 
 All of these buttons share the same propTypes
 
-  - background (string): the background of the button
-  - color (string): the text- and icon color
-  - size (string || number): size of the whole button (example: "1.5" or 0.5)
-  - width: (number | string): width in px of the button (default: "auto")
-  - hideText (bool): whether or not a text should be displayed
-  - text: (string): the button label (default: "Login with METHOD")
-  - children (string): same as text (if both set, children will win)
+| name | type | default | description |
+|------|------|---------|-------------|
+| background | string | depends on button | the background color of the button |
+| color | string | whitesmoke | the text and icon color |
+| size | string / number | 1.0 | the size of the whole button (example: "1.5" or 0.5) |
+| width | string / number | auto | the width of the button (number is in pixel) |
+| hideText | bool | false | whether or not a text should be displayed. Set to true, if you only want to show the icon |
+| text | string | "Login with METHOD" | the button label |
+| children | string | | same as text (if both set, children will win) |
+
