@@ -36,6 +36,7 @@ $ npm install --save redux-firebase-user
             - [request](#request-2)
     - [Components](#components)
         - [AuthOButtons](#authobuttons)
+    - [Selectors](#selectors)
 
 <!-- /TOC -->
 
@@ -345,4 +346,32 @@ All of these buttons share the same propTypes
 | hideText | bool | false | whether or not a text should be displayed. Set to true, if you only want to show the icon |
 | text | string | "Login with METHOD" | the button label |
 | children | string | | same as text (if both set, children will win) |
+
+
+
+## Selectors
+
+Although this library provides serveral selectors, the recommended way to get a shape of the state is via hocs. But if no hoc fulfill your needs, you are also able to access the user state by a set of serveral selectors. All of them accepts the global state (not the user state) as the first state argument and optional further arguments. These selectors can be accessed via 
+
+```javascript
+import { selectors } from 'redux-firebase-user'
+
+let user = selectors.getUser(state)
+```
+
+Here is the full list of all available selectors:
+
+| name                | arguments | return        | description |
+|---------------------|-----------|---------------|-------------|
+| getUser             | state     | null / object | returns the login details of the currently logged in user |
+| isLoggedIn          | state     | bool          | returns whether or not the user is currently logged in |
+| isFetchingLogin     | state     | bool          | returns whether or not the user currently trys to log in |
+| loginFetchFailed    | state     | bool          | true if the last login failed |
+| getLoginFetchError  | state     | null / string | holds the error, if the last login failed |
+| isFetchingLogout    | state     | bool          | returns whether or not the user currently trys to log out |
+| logoutFetchFailed   | state     | bool          | true if the last logout failed |
+| getLogoutFetchError | state     | null / string | holds the error, if the last logout failed |
+| isFetchingSignup    | state     | bool          | returns whether or not the user currently trys to sign up |
+| signupFetchFailed   | state     | bool          | true if the last signup failed |
+| getSignupFetchError | state     | null / string | holds the error, if the last signup failed |
 
