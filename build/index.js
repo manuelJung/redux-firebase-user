@@ -191,12 +191,6 @@ Object.defineProperty(exports, 'TwitterAuthOButton', {
   }
 });
 
-var _hocs = require('./hocs');
-
-var fromHocs = _interopRequireWildcard(_hocs);
-
-var fromSelectors = _interopRequireWildcard(_selectors);
-
 var _actionTypes = require('./actionTypes');
 
 var fromActionTypes = _interopRequireWildcard(_actionTypes);
@@ -204,10 +198,6 @@ var fromActionTypes = _interopRequireWildcard(_actionTypes);
 var _actions = require('./actions');
 
 var fromActions = _interopRequireWildcard(_actions);
-
-var _components = require('./components');
-
-var fromComponents = _interopRequireWildcard(_components);
 
 var _updaters = require('./updaters');
 
@@ -221,13 +211,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// export { default as config } from './config'
-
-// export const hocs        = fromHocs
-// export const selectors   = fromSelectors
 var actionTypes = exports.actionTypes = fromActionTypes;
 var actions = exports.actions = fromActions;
-// export const components  = fromComponents
 var updaters = exports.updaters = fromUpdaters;
 
 exports.default = {
