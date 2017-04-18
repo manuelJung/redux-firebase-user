@@ -19,20 +19,23 @@ $ npm install --save redux-firebase-user
         - [withLoginForm](#withloginform)
             - [api](#api)
             - [usage](#usage)
-        - [withSignupForm](#withsignupform)
+        - [withAutoLogin](#withautologin)
             - [api](#api-1)
             - [usage](#usage-1)
-        - [withLogoutButton](#withlogoutbutton)
+        - [withSignupForm](#withsignupform)
             - [api](#api-2)
             - [usage](#usage-2)
-        - [withLoginRequest](#withloginrequest)
+        - [withLogoutButton](#withlogoutbutton)
             - [api](#api-3)
+            - [usage](#usage-3)
+        - [withLoginRequest](#withloginrequest)
+            - [api](#api-4)
             - [request](#request)
         - [withLogoutRequest](#withlogoutrequest)
-            - [api](#api-4)
+            - [api](#api-5)
             - [request](#request-1)
         - [withSignupRequest](#withsignuprequest)
-            - [api](#api-5)
+            - [api](#api-6)
             - [request](#request-2)
     - [Components](#components)
         - [AuthOButtons](#authobuttons)
@@ -112,6 +115,40 @@ export const LoginForm = ({
 )
 
 export default withLoginForm(LoginForm)
+```
+
+### withAutoLogin
+
+this hoc is responsible for auto login a user. When at least one component is wrapped with this hoc then the user will be auto logged in (if the user was logged in when he left the website on the previous session)
+
+#### api
+
+| name           | type   | injection                | explanation                                              |
+|----------------|--------|--------------------------|----------------------------------------------------------|
+| awaitingResponse   | props  | props.autoLogin | true, if auto login is currently performing |
+
+#### usage
+
+```javascript
+import React from 'react'
+import { hocs } from 'redux-firebase-user'
+
+const { withAutoLogin } = hocs
+
+
+export const AppWrapper = (
+  autoLogin: { awaitingResponse }
+}) => (
+  <div>
+    {
+      awaitingResponse
+        ? <div>waiting for login...</div>
+        : <App/>
+    }
+  </div>
+)
+
+export default withAutoLogin(AppWrapper)
 ```
 
 
