@@ -58,4 +58,22 @@ Object.defineProperty(exports, 'withLogoutButton', {
   }
 });
 
+var _withSignupForm = require('./withSignupForm');
+
+Object.defineProperty(exports, 'withSignupForm', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withSignupForm).default;
+  }
+});
+
+var _withAutoLogin = require('./withAutoLogin');
+
+Object.defineProperty(exports, 'withAutoLogin', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withAutoLogin).default;
+  }
+});
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

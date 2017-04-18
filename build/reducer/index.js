@@ -51,18 +51,6 @@ function reducer() {
 
   switch (action.type) {
 
-    // case t.FETCH_LOGIN_SUCCESS: return { 
-    //   ...state, 
-    //   user         : action.payload,
-    //   loginRequest : loginRequest(state.loginRequest, action)
-    // }
-
-    // case t.FETCH_LOGOUT_SUCCESS: return {
-    //   ...state, 
-    //   user          : null,
-    //   logoutRequest : loginRequest(state.loginRequest, action)
-    // }
-
     case t.FETCH_LOGIN_SUCCESS:
       return _extends({}, updaters.setUser(state, action.payload), {
         loginRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
@@ -71,6 +59,11 @@ function reducer() {
     case t.FETCH_LOGOUT_SUCCESS:
       return _extends({}, updaters.clearUser(state), {
         logoutRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
+      });
+
+    case t.FETCH_SIGNUP_SUCCESS:
+      return _extends({}, updaters.setUser(state, action.payload), {
+        signupRequest: (0, fromSignupRequest.default)(state.signupRequest, action)
       });
 
     default:

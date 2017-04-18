@@ -49,14 +49,6 @@ exports.default = function (email, password) {
 
     return auth.createUserWithEmailAndPassword(email, password).then(function (response) {
       dispatch(fetchSignupSuccess(email, password, response));
-      // if (response.key) {
-      //   dispatch(signupSuccess(email, password, response))
-      // }
-      // else {
-      //   dispatch(signupFailure(email, password, response))
-      // }
-      // TODO
-      document.response = response;
       return response;
     }).catch(function (error) {
       dispatch(fetchSignupFailure(email, password, error));
