@@ -13,7 +13,7 @@ export { default as reducer } from './reducer'
 // export const selectors   = fromSelectors
 export const actionTypes = fromActionTypes
 export const actions     = fromActions
-export const components  = fromComponents
+// export const components  = fromComponents
 export const updaters    = fromUpdaters
 
 export default {
@@ -46,3 +46,10 @@ export { getLogoutFetchError } from './selectors'
 export { isFetchingSignup } from './selectors'
 export { signupFetchFailed } from './selectors'
 export { getSignupFetchError } from './selectors'
+
+// components
+
+export { default as GithubAuthOButton } from './components/GithubAuthOButton'
+export { default as GoogleAuthOButton } from './components/GoogleAuthOButton'
+export { default as FacebookAuthOButton } from './components/FacebookAuthOButton'
+export { default as TwitterAuthOButton } from './components/TwitterAuthOButton'
