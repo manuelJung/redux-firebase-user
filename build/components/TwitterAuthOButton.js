@@ -11,6 +11,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _AbstractAuthOButton = require('./AbstractAuthOButton');
 
 var _AbstractAuthOButton2 = _interopRequireDefault(_AbstractAuthOButton);
@@ -55,8 +59,8 @@ exports.default = (0, _withLoginRequest2.default)(TwitterAuthOButton);
 
 TwitterAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: _react.PropTypes.shape({
-    isFetching: _react.PropTypes.bool.isRequired
+  loginRequest: _propTypes2.default.shape({
+    isFetching: _propTypes2.default.bool.isRequired
   }).isRequired,
 
   // injected by LoginRequest
@@ -66,29 +70,29 @@ TwitterAuthOButton.propTypes = {
 
   // background of button => css color
   // default: #00ACED (twitter blue)
-  background: _react.PropTypes.string,
+  background: _propTypes2.default.string,
 
   // font and icon color => css color
   // default: whitesmoke
-  color: _react.PropTypes.string,
+  color: _propTypes2.default.string,
 
   // size of everything in percent (float or floatable string)
   // 0 => 0%
   // 1 => 100% (default)
-  size: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
+  size: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number]),
 
   // width of the button
   // default: auto
-  width: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string // z.b 50%
+  width: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string // z.b 50%
   ]),
 
   // if true, no text will be displayed width will be shrinked to icon width
-  hideText: _react.PropTypes.bool,
+  hideText: _propTypes2.default.bool,
 
   // displayed text
   // default: Login with Twitter
-  text: _react.PropTypes.string,
+  text: _propTypes2.default.string,
 
   // displayed text (higher priority as text)
-  children: _react.PropTypes.string
+  children: _propTypes2.default.string
 };

@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _login = require('../actions/login');
 
 var _config = require('../config');
@@ -116,6 +120,6 @@ exports.default = function (BaseComponent) {
 
     return WithAutoLogin;
   }(_react2.default.Component), _class.contextTypes = {
-    store: _react2.default.PropTypes.object
+    store: _propTypes2.default.object
   }, _class.awaitingResponse = true, _class.shouldRequest = true, _temp2;
 };

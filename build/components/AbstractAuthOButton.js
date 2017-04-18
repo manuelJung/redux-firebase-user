@@ -9,6 +9,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -80,30 +84,30 @@ exports.default = AbstractAuthOButton;
 
 AbstractAuthOButton.propTypes = {
   // cb for click event
-  onClick: _react.PropTypes.func.isRequired,
+  onClick: _propTypes2.default.func.isRequired,
 
   // background of button => css color
-  background: _react.PropTypes.string.isRequired,
+  background: _propTypes2.default.string.isRequired,
 
   // font and icon color => css color
-  color: _react.PropTypes.string.isRequired,
+  color: _propTypes2.default.string.isRequired,
 
   // size of everything in percent
   // 0 => 0%
   // 1 => 100%
-  size: _react.PropTypes.number.isRequired,
+  size: _propTypes2.default.number.isRequired,
 
   // width of the button
   // default: auto
-  width: _react.PropTypes.oneOfType([_react.PropTypes.number, _react.PropTypes.string // z.b 50%
+  width: _propTypes2.default.oneOfType([_propTypes2.default.number, _propTypes2.default.string // z.b 50%
   ]),
 
   // if true, no text will be displayed width will be shrinked to icon width
-  hideText: _react.PropTypes.bool,
+  hideText: _propTypes2.default.bool,
 
   // displayed text
-  text: _react.PropTypes.string,
+  text: _propTypes2.default.string,
 
   // displayed text (higher priority as text)
-  children: _react.PropTypes.string
+  children: _propTypes2.default.string
 };

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { isFetchingLogout, logoutFetchFailed, getLogoutFetchError } from '../selectors'
 import { logout as logoutAction } from '../actions'
 import config from '../config'
@@ -8,7 +9,7 @@ import config from '../config'
 export default (BaseComponent) => class WithLogoutRequest extends React.Component {
   
   static contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
   }
   
   unsubscribeStore = null

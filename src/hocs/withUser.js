@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { isLoggedIn, getUser } from '../selectors'
 import config from '../config'
 
@@ -6,7 +7,7 @@ import config from '../config'
 export default (BaseComponent) => class WithLoginForm extends React.Component {
   
   static contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
   }
   
   unsubscribeStore = null

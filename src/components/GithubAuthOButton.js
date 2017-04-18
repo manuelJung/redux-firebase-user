@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import AbstractAuthOButton from './AbstractAuthOButton'
 import withLoginRequest from '../hocs/withLoginRequest'
 

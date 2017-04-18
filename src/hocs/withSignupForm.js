@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { isFetchingSignup, signupFetchFailed, getSignupFetchError } from '../selectors'
 import { signup as signupAction } from '../actions'
 import config from '../config'
@@ -7,7 +8,7 @@ import config from '../config'
 export default (BaseComponent) => class WithSignupForm extends React.Component {
   
   static contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
   }
   
   state = {

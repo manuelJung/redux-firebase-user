@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/manuelJung/redux-firebase-user#readme",
   "dependencies": {
+    "prop-types": "^15.5.8",
     "react": "^15.5.4"
   },
   "devDependencies": {

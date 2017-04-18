@@ -12,6 +12,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _selectors = require('../selectors');
 
 var _actions = require('../actions');
@@ -120,6 +124,6 @@ exports.default = function (BaseComponent) {
 
     return WithLogoutButton;
   }(_react2.default.Component), _class.contextTypes = {
-    store: _react2.default.PropTypes.object
+    store: _propTypes2.default.object
   }, _temp2;
 };

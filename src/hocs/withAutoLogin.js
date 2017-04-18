@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { fetchLoginSuccess } from '../actions/login'
 import config from '../config'
 
@@ -6,7 +7,7 @@ import config from '../config'
 export default (BaseComponent) => class WithAutoLogin extends React.Component {
   
   static contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
   }
 
   // will be set to false after the request resolves

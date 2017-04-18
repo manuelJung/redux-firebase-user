@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { isFetchingLogin, loginFetchFailed, getLoginFetchError } from '../selectors'
 import { login as loginAction } from '../actions'
 import config from '../config'
@@ -7,7 +8,7 @@ import config from '../config'
 export default (BaseComponent) => class WithLoginForm extends React.Component {
   
   static contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
   }
   
   state = {
