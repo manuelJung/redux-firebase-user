@@ -43,7 +43,7 @@ exports.default = function (BaseComponent) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithAutoLogin.__proto__ || Object.getPrototypeOf(WithAutoLogin)).call.apply(_ref, [this].concat(args))), _this), _this.isMounted = false, _this.state = {
+      return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WithAutoLogin.__proto__ || Object.getPrototypeOf(WithAutoLogin)).call.apply(_ref, [this].concat(args))), _this), _this.hasMounted = false, _this.state = {
         awaitingResponse: WithAutoLogin.awaitingResponse
       }, _temp), _possibleConstructorReturn(_this, _ret);
     }
@@ -64,7 +64,7 @@ exports.default = function (BaseComponent) {
         var _this2 = this;
 
         var dispatch = this.context.store.dispatch;
-        this.isMounted = true;
+        this.hasMounted = true;
 
         // start request if this is the first instance
         if (WithAutoLogin.shouldRequest) {
@@ -84,7 +84,7 @@ exports.default = function (BaseComponent) {
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        this.isMounted = false;
+        this.hasMounted = false;
       }
     }, {
       key: 'finnishAutoLogin',
@@ -92,7 +92,7 @@ exports.default = function (BaseComponent) {
         WithAutoLogin.awaitingResponse = false;
 
         // only call setState on a mounted component
-        if (this.isMounted) {
+        if (this.hasMounted) {
           this.setState({ awaitingResponse: false });
         }
       }

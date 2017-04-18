@@ -17,7 +17,7 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
   static shouldRequest = true
 
   // true if the instance is currently mounted
-  isMounted = false
+  hasMounted = false
 
   state = {
     awaitingResponse: WithAutoLogin.awaitingResponse
@@ -25,7 +25,7 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
 
   componentWillMount () {
     const dispatch = this.context.store.dispatch
-    this.isMounted  = true
+    this.hasMounted  = true
 
     // start request if this is the first instance
     if(WithAutoLogin.shouldRequest){
@@ -44,14 +44,14 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
   }
 
   componentWillUnmount () {
-    this.isMounted = false
+    this.hasMounted = false
   }
 
   finnishAutoLogin () {
     WithAutoLogin.awaitingResponse = false
 
     // only call setState on a mounted component
-    if(this.isMounted){
+    if(this.hasMounted){
       this.setState({ awaitingResponse: false })
     }
   }
