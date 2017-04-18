@@ -176,10 +176,7 @@ this hoc provides functions and component props for a signup form component
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withSignupForm } = hocs
-
+import { withSignupForm } from 'redux-firebase-user'
 
 export const SignupForm = ({
   signupFormComponents: { emailInput, passwordInput, submitInput },
@@ -217,10 +214,7 @@ this hoc provides functions and component props for a logout button. Is nearly t
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withLogoutButton } = hocs
-
+import { withLogoutButton } from 'redux-firebase-user'
 
 export const LogoutForm = ({
   logoutButtonComponents: { logoutButton },
@@ -256,10 +250,7 @@ this hoc provides functions and props for logging in a user
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withLoginRequest } = hocs
-
+import { withLoginRequest } from 'redux-firebase-user'
 
 export const LoginForm = ({
   loginRequest: { isFetching, fetchFailed, fetchError },
@@ -294,10 +285,7 @@ this hoc provides functions and props for logging in a user
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withLogoutRequest } = hocs
-
+import { withLogoutRequest } from 'redux-firebase-user'
 
 export const LogoutForm = ({
   logoutRequest: { isFetching, fetchFailed, fetchError },
