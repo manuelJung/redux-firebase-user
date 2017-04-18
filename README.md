@@ -337,15 +337,12 @@ This will change soon. The following AuthO button components are provided:
 
 ```javascript
 import React from 'react'
-import { components } from 'redux-firebase-user'
-
-const { 
+import {
   GoogleAuthOButton, 
   GithubAuthOButton, 
   FacebookAuthOButton, 
-  TwitterAuthOButton 
-} = components
-
+  TwitterAuthOButton
+} from 'redux-firebase-user'
 
 
 export const LoginForm = () => (
@@ -379,9 +376,10 @@ All of these buttons share the same propTypes
 Although this library provides serveral selectors, the recommended way to get a shape of the state is via hocs. But if no hoc fulfill your needs, you are also able to access the user state by a set of serveral selectors. All of them accepts the global state (not the user state) as the first state argument and optional further arguments. These selectors can be accessed via 
 
 ```javascript
-import { selectors } from 'redux-firebase-user'
+import { getUser, isLoggedIn } from 'redux-firebase-user'
 
-let user = selectors.getUser(state)
+let user = getUser(state)
+let loggedIn = isLoggedIn(state)
 ```
 
 Here is the full list of all available selectors:
