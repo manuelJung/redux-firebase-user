@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updaters = exports.components = exports.actions = exports.actionTypes = exports.selectors = exports.hocs = exports.reducer = undefined;
+exports.getSignupFetchError = exports.signupFetchFailed = exports.isFetchingSignup = exports.getLogoutFetchError = exports.logoutFetchFailed = exports.isFetchingLogout = exports.getLoginFetchError = exports.loginFetchFailed = exports.isFetchingLogin = exports.isLoggedIn = exports.getUser = exports.withSignupRequest = exports.withSignupForm = exports.withLogoutRequest = exports.withLogoutButton = exports.withLoginRequest = exports.withLoginForm = exports.withAutoLogin = exports.withUser = exports.updaters = exports.components = exports.actions = exports.actionTypes = exports.reducer = undefined;
 
 var _reducer = require('./reducer');
 
@@ -14,11 +14,150 @@ Object.defineProperty(exports, 'reducer', {
   }
 });
 
+var _withUser = require('./hocs/withUser');
+
+Object.defineProperty(exports, 'withUser', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withUser).default;
+  }
+});
+
+var _withAutoLogin = require('./hocs/withAutoLogin');
+
+Object.defineProperty(exports, 'withAutoLogin', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withAutoLogin).default;
+  }
+});
+
+var _withLoginForm = require('./hocs/withLoginForm');
+
+Object.defineProperty(exports, 'withLoginForm', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withLoginForm).default;
+  }
+});
+
+var _withLoginRequest = require('./hocs/withLoginRequest');
+
+Object.defineProperty(exports, 'withLoginRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withLoginRequest).default;
+  }
+});
+
+var _withLogoutButton = require('./hocs/withLogoutButton');
+
+Object.defineProperty(exports, 'withLogoutButton', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withLogoutButton).default;
+  }
+});
+
+var _withLogoutRequest = require('./hocs/withLogoutRequest');
+
+Object.defineProperty(exports, 'withLogoutRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withLogoutRequest).default;
+  }
+});
+
+var _withSignupForm = require('./hocs/withSignupForm');
+
+Object.defineProperty(exports, 'withSignupForm', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withSignupForm).default;
+  }
+});
+
+var _withSignupRequest = require('./hocs/withSignupRequest');
+
+Object.defineProperty(exports, 'withSignupRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_withSignupRequest).default;
+  }
+});
+
+var _selectors = require('./selectors');
+
+Object.defineProperty(exports, 'getUser', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.getUser;
+  }
+});
+Object.defineProperty(exports, 'isLoggedIn', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.isLoggedIn;
+  }
+});
+Object.defineProperty(exports, 'isFetchingLogin', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.isFetchingLogin;
+  }
+});
+Object.defineProperty(exports, 'loginFetchFailed', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.loginFetchFailed;
+  }
+});
+Object.defineProperty(exports, 'getLoginFetchError', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.getLoginFetchError;
+  }
+});
+Object.defineProperty(exports, 'isFetchingLogout', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.isFetchingLogout;
+  }
+});
+Object.defineProperty(exports, 'logoutFetchFailed', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.logoutFetchFailed;
+  }
+});
+Object.defineProperty(exports, 'getLogoutFetchError', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.getLogoutFetchError;
+  }
+});
+Object.defineProperty(exports, 'isFetchingSignup', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.isFetchingSignup;
+  }
+});
+Object.defineProperty(exports, 'signupFetchFailed', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.signupFetchFailed;
+  }
+});
+Object.defineProperty(exports, 'getSignupFetchError', {
+  enumerable: true,
+  get: function get() {
+    return _selectors.getSignupFetchError;
+  }
+});
+
 var _hocs = require('./hocs');
 
 var fromHocs = _interopRequireWildcard(_hocs);
-
-var _selectors = require('./selectors');
 
 var fromSelectors = _interopRequireWildcard(_selectors);
 
@@ -48,8 +187,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // export { default as config } from './config'
 
-var hocs = exports.hocs = fromHocs;
-var selectors = exports.selectors = fromSelectors;
+// export const hocs        = fromHocs
+// export const selectors   = fromSelectors
 var actionTypes = exports.actionTypes = fromActionTypes;
 var actions = exports.actions = fromActions;
 var components = exports.components = fromComponents;
@@ -59,3 +198,5 @@ exports.default = {
   initializeModule: _config2.default.setConfig,
   updateModule: _config2.default.setConfig
 };
+
+// HOCs
