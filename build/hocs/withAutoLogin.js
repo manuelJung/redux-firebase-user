@@ -78,7 +78,7 @@ exports.default = function (BaseComponent) {
               unsubscribe();
               _this2.finnishAutoLogin();
             } else {
-              dispatch((0, _login.fetchLoginSuccess)("AUTO_LOGIN"));
+              dispatch((0, _login.fetchLoginSuccess)(user, "AUTO_LOGIN"));
               unsubscribe();
               _this2.finnishAutoLogin();
             }

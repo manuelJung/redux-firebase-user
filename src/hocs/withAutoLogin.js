@@ -36,7 +36,7 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
           unsubscribe()
           this.finnishAutoLogin()
         } else {
-          dispatch(fetchLoginSuccess("AUTO_LOGIN"))
+          dispatch(fetchLoginSuccess(user, "AUTO_LOGIN"))
           unsubscribe()
           this.finnishAutoLogin()
         }
