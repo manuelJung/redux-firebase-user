@@ -43,6 +43,15 @@ export default (BaseComponent) => class WithSignupForm extends React.Component {
     const reducerKey = config.getConfig().reducerKey
     return prevState[reducerKey] !== nextState[reducerKey]
   }
+
+  // createNewInputComponent (name) {
+  //   this.setState({ [name]: '' })
+
+  //   return {
+  //     value: this.state[name],
+  //     onChange: (e) => this.setState({ [name]: e.target.value })
+  //   }
+  // }
   
   getInjection () {
     const state = this.context.store.getState()
@@ -85,7 +94,8 @@ export default (BaseComponent) => class WithSignupForm extends React.Component {
         },
         submitButton: {
           onClick: signup,
-        }
+        },
+        // createInput: this.createNewInputComponent
       }
     }
   }
