@@ -41,14 +41,12 @@ export default (email, password) => dispatch => {
     })
 }
 
-export const loginWithGoogle = () => dispatch => {
-  var method = 'GOOGLE_AUTHO'
-  var auth = config.getConfig().firebase.auth
-  var provider = new auth.GoogleAuthProvider()
-  
+const authOLogin = (config) => dispatch => {
+  var method = config.method
+
   dispatch(fetchLoginRequest(method))
-  
-  return auth().signInWithPopup(provider)
+
+  return config.request()
     .then(response => {
       dispatch(fetchLoginSuccess(response, method))
       return response.user
@@ -61,74 +59,52 @@ export const loginWithGoogle = () => dispatch => {
       dispatch(fetchLoginFailure(error, method))
       return error
     })
-  
 }
 
-export const loginWithGithub = () => dispatch => {
-  var method = 'GITHUB_AUTHO'
+export const loginWithGoogle = () => dispatch => {
+  var method = 'GOOGLE_AUTH_O'
   var auth = config.getConfig().firebase.auth
-  var provider = new auth.GithubAuthProvider()
-  
-  dispatch(fetchLoginRequest(method))
-  
-  return auth().signInWithPopup(provider)
-    .then(response => {
-      dispatch(fetchLoginSuccess(response, method))
-      return response.user
-    })
-    .catch(response => {
-      var error = {
-        code    : response.code || 'auth/unkown-error',
-        message : response.message || 'An unkown Error appeard'
-      }
-      dispatch(fetchLoginFailure(error, method))
-      return error
-    })
-  
+  var provider = new auth.GoogleAuthProvider()
+  var request = () => auth().signInWithPopup(provider)
+
+  return authOLogin({
+    method, 
+    request
+  })(dispatch)
 }
 
 export const loginWithFacebook = () => dispatch => {
-  var method = 'FACEBOOK_AUTHO'
+  var method = 'FACEBOOK_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.FacebookAuthProvider()
-  
-  dispatch(fetchLoginRequest(method))
-  
-  return auth().signInWithPopup(provider)
-    .then(response => {
-      dispatch(fetchLoginSuccess(response, method))
-      return response.user
-    })
-    .catch(response => {
-      var error = {
-        code    : response.code || 'auth/unkown-error',
-        message : response.message || 'An unkown Error appeard'
-      }
-      dispatch(fetchLoginFailure(error, method))
-      return error
-    })
-  
+  var request = () => auth().signInWithPopup(provider)
+
+  return authOLogin({
+    method, 
+    request
+  })(dispatch)
+}
+
+export const loginWithGithub = () => dispatch => {
+  var method = 'GITHUB_AUTH_O'
+  var auth = config.getConfig().firebase.auth
+  var provider = new auth.GithubAuthProvider()
+  var request = () => auth().signInWithPopup(provider)
+
+  return authOLogin({
+    method, 
+    request
+  })(dispatch)
 }
 
 export const loginWithTwitter = () => dispatch => {
-  var method = 'TWITTER_AUTHO'
+  var method = 'TWITTER_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.TwitterAuthProvider()
-  
-  dispatch(fetchLoginRequest(method))
-  
-  return auth().signInWithPopup(provider)
-    .then(response => {
-      dispatch(fetchLoginSuccess(response, method))
-      return response.user
-    })
-    .catch(response => {
-      var error = {
-        code    : response.code || 'auth/unkown-error',
-        message : response.message || 'An unkown Error appeard'
-      }
-      dispatch(fetchLoginFailure(error, method))
-      return error
-    })
-  
+  var request = () => auth().signInWithPopup(provider)
+
+  return authOLogin({
+    method, 
+    request
+  })(dispatch)
 }

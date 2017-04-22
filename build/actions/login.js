@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loginWithTwitter = exports.loginWithFacebook = exports.loginWithGithub = exports.loginWithGoogle = exports.fetchLoginFailure = exports.fetchLoginSuccess = exports.fetchLoginRequest = undefined;
+exports.loginWithTwitter = exports.loginWithGithub = exports.loginWithFacebook = exports.loginWithGoogle = exports.fetchLoginFailure = exports.fetchLoginSuccess = exports.fetchLoginRequest = undefined;
 
 var _actionTypes = require('../actionTypes');
 
@@ -61,15 +61,13 @@ exports.default = function (email, password) {
   };
 };
 
-var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle() {
+var authOLogin = function authOLogin(config) {
   return function (dispatch) {
-    var method = 'GOOGLE_AUTHO';
-    var auth = _config2.default.getConfig().firebase.auth;
-    var provider = new auth.GoogleAuthProvider();
+    var method = config.method;
 
     dispatch(fetchLoginRequest(method));
 
-    return auth().signInWithPopup(provider).then(function (response) {
+    return config.request().then(function (response) {
       dispatch(fetchLoginSuccess(response, method));
       return response.user;
     }).catch(function (response) {
@@ -83,68 +81,66 @@ var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle() {
   };
 };
 
-var loginWithGithub = exports.loginWithGithub = function loginWithGithub() {
+var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle() {
   return function (dispatch) {
-    var method = 'GITHUB_AUTHO';
+    var method = 'GOOGLE_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
-    var provider = new auth.GithubAuthProvider();
+    var provider = new auth.GoogleAuthProvider();
+    var request = function request() {
+      return auth().signInWithPopup(provider);
+    };
 
-    dispatch(fetchLoginRequest(method));
-
-    return auth().signInWithPopup(provider).then(function (response) {
-      dispatch(fetchLoginSuccess(response, method));
-      return response.user;
-    }).catch(function (response) {
-      var error = {
-        code: response.code || 'auth/unkown-error',
-        message: response.message || 'An unkown Error appeard'
-      };
-      dispatch(fetchLoginFailure(error, method));
-      return error;
-    });
+    return authOLogin({
+      method: method,
+      request: request
+    })(dispatch);
   };
 };
 
 var loginWithFacebook = exports.loginWithFacebook = function loginWithFacebook() {
   return function (dispatch) {
-    var method = 'FACEBOOK_AUTHO';
+    var method = 'FACEBOOK_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.FacebookAuthProvider();
+    var request = function request() {
+      return auth().signInWithPopup(provider);
+    };
 
-    dispatch(fetchLoginRequest(method));
+    return authOLogin({
+      method: method,
+      request: request
+    })(dispatch);
+  };
+};
 
-    return auth().signInWithPopup(provider).then(function (response) {
-      dispatch(fetchLoginSuccess(response, method));
-      return response.user;
-    }).catch(function (response) {
-      var error = {
-        code: response.code || 'auth/unkown-error',
-        message: response.message || 'An unkown Error appeard'
-      };
-      dispatch(fetchLoginFailure(error, method));
-      return error;
-    });
+var loginWithGithub = exports.loginWithGithub = function loginWithGithub() {
+  return function (dispatch) {
+    var method = 'GITHUB_AUTH_O';
+    var auth = _config2.default.getConfig().firebase.auth;
+    var provider = new auth.GithubAuthProvider();
+    var request = function request() {
+      return auth().signInWithPopup(provider);
+    };
+
+    return authOLogin({
+      method: method,
+      request: request
+    })(dispatch);
   };
 };
 
 var loginWithTwitter = exports.loginWithTwitter = function loginWithTwitter() {
   return function (dispatch) {
-    var method = 'TWITTER_AUTHO';
+    var method = 'TWITTER_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.TwitterAuthProvider();
+    var request = function request() {
+      return auth().signInWithPopup(provider);
+    };
 
-    dispatch(fetchLoginRequest(method));
-
-    return auth().signInWithPopup(provider).then(function (response) {
-      dispatch(fetchLoginSuccess(response, method));
-      return response.user;
-    }).catch(function (response) {
-      var error = {
-        code: response.code || 'auth/unkown-error',
-        message: response.message || 'An unkown Error appeard'
-      };
-      dispatch(fetchLoginFailure(error, method));
-      return error;
-    });
+    return authOLogin({
+      method: method,
+      request: request
+    })(dispatch);
   };
 };
