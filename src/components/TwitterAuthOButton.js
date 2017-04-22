@@ -12,7 +12,7 @@ var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.
 
 export const TwitterAuthOButton = ({
   loginRequest: { isFetching },
-  // loginRequestActions: { loginWithGoogle },
+  loginRequestActions: { loginWithTwitter },
   background,
   color,
   size,
@@ -20,7 +20,7 @@ export const TwitterAuthOButton = ({
   ...rest
 }) => (
   <AbstractAuthOButton
-    onClick={ () => !isFetching && console.log("LOGIN WITH TWITTER NOT IMPLEMENTED YET") }
+    onClick={ () => !isFetching && loginWithTwitter() }
     vector={twitterVector}
     size={size ? parseFloat(size) : 1}
     background='#00ACED'
@@ -41,9 +41,9 @@ TwitterAuthOButton.propTypes = {
   }).isRequired,
   
   // injected by LoginRequest
-  // loginRequestActions: PropTypes.shape({
-  //   loginWithGoogle: PropTypes.func.isRequired
-  // }).isRequired,
+  loginRequestActions: PropTypes.shape({
+    loginWithTwitter: PropTypes.func.isRequired
+  }).isRequired,
   
   // background of button => css color
   // default: #00ACED (twitter blue)

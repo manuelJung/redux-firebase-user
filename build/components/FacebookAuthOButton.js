@@ -31,17 +31,18 @@ var facebookVector = "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.
 
 var FacebookAuthOButton = function FacebookAuthOButton(_ref) {
   var isFetching = _ref.loginRequest.isFetching,
+      loginWithFacebook = _ref.loginRequestActions.loginWithFacebook,
       background = _ref.background,
       color = _ref.color,
       size = _ref.size,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ['loginRequest', 'background', 'color', 'size', 'children']);
+      rest = _objectWithoutProperties(_ref, ['loginRequest', 'loginRequestActions', 'background', 'color', 'size', 'children']);
 
   return _react2.default.createElement(
     _AbstractAuthOButton2.default,
     _extends({
       onClick: function onClick() {
-        return !isFetching && console.log("LOGIN WITH FACEBOOK NOT IMPLEMENTED YET");
+        return !isFetching && loginWithFacebook();
       },
       vector: facebookVector,
       size: size ? parseFloat(size) : 1,
@@ -64,9 +65,9 @@ FacebookAuthOButton.propTypes = {
   }).isRequired,
 
   // injected by LoginRequest
-  // loginRequestActions: PropTypes.shape({
-  //   loginWithGoogle: PropTypes.func.isRequired
-  // }).isRequired,
+  loginRequestActions: _propTypes2.default.shape({
+    loginWithFacebook: _propTypes2.default.func.isRequired
+  }).isRequired,
 
   // background of button => css color
   // default: #29487D (facebook blue)

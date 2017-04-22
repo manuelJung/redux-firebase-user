@@ -1,7 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { isFetchingLogin, loginFetchFailed, getLoginFetchError } from '../selectors'
-import { login as loginAction, loginWithGoogle as loginWithGoogleAction } from '../actions'
+import { 
+  login as loginAction, 
+  loginWithGoogle as loginWithGoogleAction,
+  loginWithFacebook as loginWithFacebookAction,
+  loginWithGithub as loginWithGithubAction,
+  loginWithTwitter as loginWithTwitterAction
+} from '../actions'
 import config from '../config'
 
 
@@ -43,8 +49,11 @@ export default (BaseComponent) => class WithLoginRequest extends React.Component
     const state = this.context.store.getState()
     const dispatch = this.context.store.dispatch
     
-    const login           = (username, password) => dispatch(loginAction(username, password))
-    const loginWithGoogle = () => dispatch(loginWithGoogleAction())
+    const login             = (username, password) => dispatch(loginAction(username, password))
+    const loginWithGoogle   = () => dispatch(loginWithGoogleAction())
+    const loginWithFacebook = () => dispatch(loginWithFacebookAction())
+    const loginWithGithub   = () => dispatch(loginWithGithubAction())
+    const loginWithTwitter  = () => dispatch(loginWithTwitterAction())
     
     return {
       
@@ -54,7 +63,7 @@ export default (BaseComponent) => class WithLoginRequest extends React.Component
         fetchError  : getLoginFetchError(state)
       },
       
-      loginRequestActions: { login, loginWithGoogle },
+      loginRequestActions: { login, loginWithGoogle, loginWithFacebook, loginWithGithub, loginWithTwitter },
       
     }
   }

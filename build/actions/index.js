@@ -36,5 +36,23 @@ Object.defineProperty(exports, 'loginWithGoogle', {
     return _login.loginWithGoogle;
   }
 });
+Object.defineProperty(exports, 'loginWithFacebook', {
+  enumerable: true,
+  get: function get() {
+    return _login.loginWithFacebook;
+  }
+});
+Object.defineProperty(exports, 'loginWithGithub', {
+  enumerable: true,
+  get: function get() {
+    return _login.loginWithGithub;
+  }
+});
+Object.defineProperty(exports, 'loginWithTwitter', {
+  enumerable: true,
+  get: function get() {
+    return _login.loginWithTwitter;
+  }
+});
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

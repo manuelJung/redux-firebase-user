@@ -31,17 +31,18 @@ var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.
 
 var TwitterAuthOButton = function TwitterAuthOButton(_ref) {
   var isFetching = _ref.loginRequest.isFetching,
+      loginWithTwitter = _ref.loginRequestActions.loginWithTwitter,
       background = _ref.background,
       color = _ref.color,
       size = _ref.size,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ['loginRequest', 'background', 'color', 'size', 'children']);
+      rest = _objectWithoutProperties(_ref, ['loginRequest', 'loginRequestActions', 'background', 'color', 'size', 'children']);
 
   return _react2.default.createElement(
     _AbstractAuthOButton2.default,
     _extends({
       onClick: function onClick() {
-        return !isFetching && console.log("LOGIN WITH TWITTER NOT IMPLEMENTED YET");
+        return !isFetching && loginWithTwitter();
       },
       vector: twitterVector,
       size: size ? parseFloat(size) : 1,
@@ -64,9 +65,9 @@ TwitterAuthOButton.propTypes = {
   }).isRequired,
 
   // injected by LoginRequest
-  // loginRequestActions: PropTypes.shape({
-  //   loginWithGoogle: PropTypes.func.isRequired
-  // }).isRequired,
+  loginRequestActions: _propTypes2.default.shape({
+    loginWithTwitter: _propTypes2.default.func.isRequired
+  }).isRequired,
 
   // background of button => css color
   // default: #00ACED (twitter blue)

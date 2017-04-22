@@ -94,6 +94,15 @@ exports.default = function (BaseComponent) {
         var loginWithGoogle = function loginWithGoogle() {
           return dispatch((0, _actions.loginWithGoogle)());
         };
+        var loginWithFacebook = function loginWithFacebook() {
+          return dispatch((0, _actions.loginWithFacebook)());
+        };
+        var loginWithGithub = function loginWithGithub() {
+          return dispatch((0, _actions.loginWithGithub)());
+        };
+        var loginWithTwitter = function loginWithTwitter() {
+          return dispatch((0, _actions.loginWithTwitter)());
+        };
 
         return {
 
@@ -103,7 +112,7 @@ exports.default = function (BaseComponent) {
             fetchError: (0, _selectors.getLoginFetchError)(state)
           },
 
-          loginRequestActions: { login: login, loginWithGoogle: loginWithGoogle }
+          loginRequestActions: { login: login, loginWithGoogle: loginWithGoogle, loginWithFacebook: loginWithFacebook, loginWithGithub: loginWithGithub, loginWithTwitter: loginWithTwitter }
 
         };
       }

@@ -85,6 +85,16 @@ exports.default = function (BaseComponent) {
         var reducerKey = _config2.default.getConfig().reducerKey;
         return prevState[reducerKey] !== nextState[reducerKey];
       }
+
+      // createNewInputComponent (name) {
+      //   this.setState({ [name]: '' })
+
+      //   return {
+      //     value: this.state[name],
+      //     onChange: (e) => this.setState({ [name]: e.target.value })
+      //   }
+      // }
+
     }, {
       key: 'getInjection',
       value: function getInjection() {
