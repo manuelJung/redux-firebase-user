@@ -61,13 +61,20 @@ exports.default = function (email, password) {
   };
 };
 
-var authOLogin = function authOLogin(config) {
+var authOLogin = function authOLogin(args) {
   return function (dispatch) {
-    var method = config.method;
+    var method = args.method;
+    var auth = _config2.default.getConfig().firebase.auth;
+    var request = args.requestType === 'redirect' ? function () {
+      auth().signInWithRedirect(args.provider);
+      return auth().getRedirectResult();
+    } : function () {
+      return auth().signInWithPopup(args.provider);
+    };
 
     dispatch(fetchLoginRequest(method));
 
-    return config.request().then(function (response) {
+    return request().then(function (response) {
       dispatch(fetchLoginSuccess(response, method));
       return response.user;
     }).catch(function (response) {
@@ -81,66 +88,58 @@ var authOLogin = function authOLogin(config) {
   };
 };
 
-var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle() {
+var loginWithGoogle = exports.loginWithGoogle = function loginWithGoogle(args) {
   return function (dispatch) {
     var method = 'GOOGLE_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.GoogleAuthProvider();
-    var request = function request() {
-      return auth().signInWithPopup(provider);
-    };
 
     return authOLogin({
       method: method,
-      request: request
+      provider: provider,
+      requestType: args ? args.requestType : ''
     })(dispatch);
   };
 };
 
-var loginWithFacebook = exports.loginWithFacebook = function loginWithFacebook() {
+var loginWithFacebook = exports.loginWithFacebook = function loginWithFacebook(args) {
   return function (dispatch) {
     var method = 'FACEBOOK_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.FacebookAuthProvider();
-    var request = function request() {
-      return auth().signInWithPopup(provider);
-    };
 
     return authOLogin({
       method: method,
-      request: request
+      provider: provider,
+      requestType: args ? args.requestType : ''
     })(dispatch);
   };
 };
 
-var loginWithGithub = exports.loginWithGithub = function loginWithGithub() {
+var loginWithGithub = exports.loginWithGithub = function loginWithGithub(args) {
   return function (dispatch) {
     var method = 'GITHUB_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.GithubAuthProvider();
-    var request = function request() {
-      return auth().signInWithPopup(provider);
-    };
 
     return authOLogin({
       method: method,
-      request: request
+      provider: provider,
+      requestType: args ? args.requestType : ''
     })(dispatch);
   };
 };
 
-var loginWithTwitter = exports.loginWithTwitter = function loginWithTwitter() {
+var loginWithTwitter = exports.loginWithTwitter = function loginWithTwitter(args) {
   return function (dispatch) {
     var method = 'TWITTER_AUTH_O';
     var auth = _config2.default.getConfig().firebase.auth;
     var provider = new auth.TwitterAuthProvider();
-    var request = function request() {
-      return auth().signInWithPopup(provider);
-    };
 
     return authOLogin({
       method: method,
-      request: request
+      provider: provider,
+      requestType: args ? args.requestType : ''
     })(dispatch);
   };
 };

@@ -41,12 +41,19 @@ export default (email, password) => dispatch => {
     })
 }
 
-const authOLogin = (config) => dispatch => {
-  var method = config.method
+const authOLogin = (args) => dispatch => {
+  var method = args.method
+  var auth = config.getConfig().firebase.auth
+  var request = args.requestType === 'redirect'
+    ? () => {
+      auth().signInWithRedirect(args.provider)
+      return auth().getRedirectResult()
+    } 
+    : () => auth().signInWithPopup(args.provider)
 
   dispatch(fetchLoginRequest(method))
 
-  return config.request()
+  return request()
     .then(response => {
       dispatch(fetchLoginSuccess(response, method))
       return response.user
@@ -61,50 +68,50 @@ const authOLogin = (config) => dispatch => {
     })
 }
 
-export const loginWithGoogle = () => dispatch => {
+export const loginWithGoogle = (args) => dispatch => {
   var method = 'GOOGLE_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.GoogleAuthProvider()
-  var request = () => auth().signInWithPopup(provider)
 
   return authOLogin({
     method, 
-    request
+    provider,
+    requestType: args ? args.requestType : ''
   })(dispatch)
 }
 
-export const loginWithFacebook = () => dispatch => {
+export const loginWithFacebook = (args) => dispatch => {
   var method = 'FACEBOOK_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.FacebookAuthProvider()
-  var request = () => auth().signInWithPopup(provider)
 
   return authOLogin({
     method, 
-    request
+    provider,
+    requestType: args ? args.requestType : ''
   })(dispatch)
 }
 
-export const loginWithGithub = () => dispatch => {
+export const loginWithGithub = (args) => dispatch => {
   var method = 'GITHUB_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.GithubAuthProvider()
-  var request = () => auth().signInWithPopup(provider)
 
   return authOLogin({
     method, 
-    request
+    provider,
+    requestType: args ? args.requestType : ''
   })(dispatch)
 }
 
-export const loginWithTwitter = () => dispatch => {
+export const loginWithTwitter = (args) => dispatch => {
   var method = 'TWITTER_AUTH_O'
   var auth = config.getConfig().firebase.auth
   var provider = new auth.TwitterAuthProvider()
-  var request = () => auth().signInWithPopup(provider)
 
   return authOLogin({
     method, 
-    request
+    provider,
+    requestType: args ? args.requestType : ''
   })(dispatch)
 }
