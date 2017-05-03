@@ -2,9 +2,18 @@
 This is a truely modular redux module, which handles authentication with firebase and react. It is not production ready!
 Api will change heavily until v1.0.0
 
+This Module exports the following
+  - **HOCs**: Higher ordered components, which inject behaviour in the wrapped React-Components
+  - **Components**: Normal React-Components which interact with the reducer state
+  - **Selectors**: Selectors for requesting the reducer state
+  - **ActionTypes**: All the action types, the reducer uses
+  - **Updaters**: Updaters are used to allow communication to other modules
+  - **Actions**: Dispatchable actions are used to modify the reducer state
+  - **Configuration** Singleton: A singleton in order to customize the module
+
 ## Install
 ```
-$ npm install --save redux-firebase-user
+$ npm i -S redux-firebase-user
 ```
 
 ## Table of Contents
@@ -17,29 +26,19 @@ $ npm install --save redux-firebase-user
     - [Setup](#setup)
     - [HOCs](#hocs)
         - [withLoginForm](#withloginform)
-            - [api](#api)
-            - [usage](#usage)
         - [withAutoLogin](#withautologin)
-            - [api](#api-1)
-            - [usage](#usage-1)
         - [withSignupForm](#withsignupform)
-            - [api](#api-2)
-            - [usage](#usage-2)
         - [withLogoutButton](#withlogoutbutton)
-            - [api](#api-3)
-            - [usage](#usage-3)
         - [withLoginRequest](#withloginrequest)
-            - [api](#api-4)
-            - [request](#request)
         - [withLogoutRequest](#withlogoutrequest)
-            - [api](#api-5)
-            - [request](#request-1)
         - [withSignupRequest](#withsignuprequest)
-            - [api](#api-6)
-            - [request](#request-2)
     - [Components](#components)
         - [AuthOButtons](#authobuttons)
     - [Selectors](#selectors)
+    - [ActionTypes](#actiontypes)
+    - [Updaters](#updaters)
+    - [Actions](#actions)
+    - [Configuration](#configuration)
 
 <!-- /TOC -->
 
@@ -54,7 +53,7 @@ import * as firebaseRef from 'firebase/app'
 firebase.initializeApp(/* YOUR CONFIG */)
 
 userModule.initializeModule({
-  firebase: firebaseRef // NOT firebase!
+  firebase: firebaseRef // NOT firebase! only 'firebase/app' holds methods for AuthO login
 })
 
 // reducer.js
@@ -71,12 +70,16 @@ const store = createStore(reducer)
 
 ## HOCs
 
+HOCs are the preferred way to interact with the reducer state. HOCs inject behavior in the wrapped React-Component.
+The main purpose of HOCs is, to make the component creation as easy and flexible as possible. Every logic how to interact with the reducer state
+and how to update it, is sitting in a HOC. Your only task is, to build the component construct and inject the behaviour of the HOC. 
+This gives you the full power of styling and customizable without injecting a big complexity
 
 ### withLoginForm
 
 this hoc provides functions and component props for a login form component
 
-#### api
+**api**
 
 | name           | type   | injection                | explanation                                              |
 |----------------|--------|--------------------------|----------------------------------------------------------|
@@ -91,13 +94,11 @@ this hoc provides functions and component props for a login form component
 | fetchFailed    | prop   | props.loginForm          | bool; true if last login request failed |
 | fetchError     | prop   | props.loginForm          | { code: string, message: string }; holds an error if the last request failed |
 
-#### usage
+**usage**
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withLoginForm } = hocs
+import { withLoginForm } from 'redux-firebase-user'
 
 
 export const LoginForm = ({
@@ -105,10 +106,13 @@ export const LoginForm = ({
   loginForm: { isFetching, fetchFailed, fetchError }
 }) => (
   <div>
-    <input {...emailInput} /><br/>
+    {/* every logic of how to interact with the state is handled by the injected component props 
+        Nevertheless you can alway overwrite the default props by simply adding the jsx props*/}
+    <input {...emailInput} placeholder='my placeholder'/><br/>
     <input {...passwordInput} /><br/>
     <input {...submitInput} />
     {
+      // if the last request fails, an error will be displayed here
       fetchFailed && <div>{ fetchError.message }</div>
     }
   </div>
@@ -121,19 +125,17 @@ export default withLoginForm(LoginForm)
 
 this hoc is responsible for auto login a user. When at least one component is wrapped with this hoc then the user will be auto logged in (if the user was logged in when he left the website on the previous session)
 
-#### api
+**api**
 
 | name           | type   | injection                | explanation                                              |
 |----------------|--------|--------------------------|----------------------------------------------------------|
 | awaitingResponse   | props  | props.autoLogin | true, if auto login is currently performing |
 
-#### usage
+**usage**
 
 ```javascript
 import React from 'react'
-import { hocs } from 'redux-firebase-user'
-
-const { withAutoLogin } = hocs
+import { withAutoLogin } from 'redux-firebase-user'
 
 
 export const AppWrapper = (
@@ -155,9 +157,9 @@ export default withAutoLogin(AppWrapper)
 
 ### withSignupForm
 
-this hoc provides functions and component props for a signup form component
+this hoc provides functions and component props for a signup form component (TODO: add custom properties)
 
-#### api
+**api**
 
 | name           | type   | injection                | explanation                                              |
 |----------------|--------|--------------------------|----------------------------------------------------------|
@@ -172,7 +174,7 @@ this hoc provides functions and component props for a signup form component
 | fetchFailed    | prop   | props.signupForm          | bool; true if last signup request failed |
 | fetchError     | prop   | props.signupForm          | { code: string, message: string }; holds an error if the last request failed |
 
-#### usage
+**usage**
 
 ```javascript
 import React from 'react'
@@ -197,9 +199,9 @@ export default withSignupForm(SignupForm)
 
 ### withLogoutButton
 
-this hoc provides functions and component props for a logout button. Is nearly the same as the withLogoutRequest hoc. 
+this hoc provides functions and component props for a logout button. Is nearly the same as the withLogoutRequest hoc, but with a button which perform a logout on click
 
-#### api
+**api**
 
 | name           | type   | injection                | explanation                                              |
 |----------------|--------|--------------------------|----------------------------------------------------------|
@@ -210,7 +212,7 @@ this hoc provides functions and component props for a logout button. Is nearly t
 | fetchError     | prop   | props.logoutButton           | { code: string, message: string }; holds an error if the last request failed |
 
 
-#### usage
+**usage**
 
 ```javascript
 import React from 'react'
@@ -234,9 +236,9 @@ export default withLogoutButton(LogoutForm)
 
 ### withLoginRequest
 
-this hoc provides functions and props for logging in a user
+this hoc provides functions and props for logging in a user. The hoc withLoginForm does the same, but offers predefined components such as passwordInput or emailInput
 
-#### api
+**api**
 
 | name            | type   | injection                | explanation                                              |
 |-----------------|--------|--------------------------|----------------------------------------------------------|
@@ -246,7 +248,7 @@ this hoc provides functions and props for logging in a user
 | fetchFailed     | prop   | props.loginRequest        | bool; true if last login request failed |
 | fetchError      | prop   | props.loginRequest        | { code: string, message: string }; holds an error if the last request failed |
 
-#### request
+**request**
 
 ```javascript
 import React from 'react'
@@ -270,9 +272,9 @@ export default withLoginRequest(LoginForm)
 
 ### withLogoutRequest
 
-this hoc provides functions and props for logging in a user
+this hoc provides functions and props for logging out a user
 
-#### api
+**api**
 
 | name            | type   | injection                | explanation                                              |
 |-----------------|--------|--------------------------|----------------------------------------------------------|
@@ -281,7 +283,7 @@ this hoc provides functions and props for logging in a user
 | fetchFailed     | prop   | props.logoutRequest        | bool; true if last logout request failed |
 | fetchError      | prop   | props.logoutRequest        | { code: string, message: string }; holds an error if the last request failed |
 
-#### request
+**request**
 
 ```javascript
 import React from 'react'
@@ -307,7 +309,7 @@ export default withLogoutRequest(LogoutForm)
 
 this hoc provides functions and props for signing up a user. Not working yet
 
-#### api
+**api**
 
 | name            | type   | injection                | explanation                                              |
 |-----------------|--------|--------------------------|----------------------------------------------------------|
@@ -316,7 +318,7 @@ this hoc provides functions and props for signing up a user. Not working yet
 | fetchFailed     | prop   | props.signupRequest        | bool; true if last signup request failed |
 | fetchError      | prop   | props.signupRequest        | { code: string, message: string }; holds an error if the last request failed |
 
-#### request
+**request**
 
 ```javascript
 
@@ -397,4 +399,42 @@ Here is the full list of all available selectors:
 | isFetchingSignup    | state     | bool          | returns whether or not the user currently trys to sign up |
 | signupFetchFailed   | state     | bool          | true if the last signup failed |
 | getSignupFetchError | state     | null / string | holds the error, if the last signup failed |
+
+
+## ActionTypes
+
+These are the actionTypes this module uses to handle reducer state change:
+
+| name                      | description |
+|---------------------------|-------------|
+| user/FETCH_LOGIN_REQUEST  | User trys to login with emailAndPassword or via a autO provider |
+| user/FETCH_LOGIN_SUCCESS  | User successfully logged in with emailAndPassword or via a autO provider |
+| user/FETCH_LOGIN_FAILURE  | User failed to login with emailAndPassword or via a autO provider |
+| user/FETCH_SIGNUP_REQUEST | User trys to signup with emailAndPassword |
+| user/FETCH_SIGNUP_SUCCESS | User successfully signed up with emailAndPassword |
+| user/FETCH_SIGNUP_FAILURE | User failed to signup with emailAndPassword |
+| user/FETCH_LOGOUT_REQUEST | User trys to logout |
+| user/FETCH_LOGOUT_SUCCESS | User successfully logged out |
+| user/FETCH_LOGOUT_FAILURE | User failed to logout |
+
+```javascript
+// your reducer
+import { actionTypes as t } from 'redux-firebase-user'
+
+export default function countReducer = (state = 0, action) {
+  switch (action.type) {
+    
+    case t.FETCH_LOGOUT_SUCCESS: return 0
+
+    default: return state
+  }
+}
+```
+
+
+## Updaters
+
+## Actions
+
+## Configuration
 
