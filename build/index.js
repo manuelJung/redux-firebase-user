@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TwitterAuthOButton = exports.FacebookAuthOButton = exports.GoogleAuthOButton = exports.GithubAuthOButton = exports.getSignupFetchError = exports.signupFetchFailed = exports.isFetchingSignup = exports.getLogoutFetchError = exports.logoutFetchFailed = exports.isFetchingLogout = exports.getLoginFetchError = exports.loginFetchFailed = exports.isFetchingLogin = exports.isLoggedIn = exports.getUser = exports.withSignupRequest = exports.withSignupForm = exports.withLogoutRequest = exports.withLogoutButton = exports.withLoginRequest = exports.withLoginForm = exports.withAutoLogin = exports.withUser = exports.updaters = exports.actions = exports.actionTypes = exports.reducer = undefined;
+exports.TwitterAuthOButton = exports.FacebookAuthOButton = exports.GoogleAuthOButton = exports.GithubAuthOButton = exports.getSignupFetchError = exports.signupFetchFailed = exports.isFetchingSignup = exports.getLogoutFetchError = exports.logoutFetchFailed = exports.isFetchingLogout = exports.getLoginFetchError = exports.loginFetchFailed = exports.isFetchingLogin = exports.isLoggedIn = exports.getUser = exports.withSignupRequest = exports.SignupRequest = exports.withSignupForm = exports.SignupForm = exports.withLogoutRequest = exports.LogoutRequest = exports.withLogoutForm = exports.LogoutForm = exports.withLoginRequest = exports.LoginRequest = exports.withLoginForm = exports.LoginForm = exports.withAutoLogin = exports.AutoLogin = exports.withUser = exports.User = exports.updaters = exports.actions = exports.actionTypes = exports.reducer = undefined;
 
 var _reducer = require('./reducer');
 
@@ -14,75 +14,123 @@ Object.defineProperty(exports, 'reducer', {
   }
 });
 
-var _withUser = require('./hocs/withUser');
+var _User = require('./renderProps/User');
 
+Object.defineProperty(exports, 'User', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_User).default;
+  }
+});
 Object.defineProperty(exports, 'withUser', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withUser).default;
+    return _User.withUser;
   }
 });
 
-var _withAutoLogin = require('./hocs/withAutoLogin');
+var _AutoLogin = require('./renderProps/AutoLogin');
 
+Object.defineProperty(exports, 'AutoLogin', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_AutoLogin).default;
+  }
+});
 Object.defineProperty(exports, 'withAutoLogin', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withAutoLogin).default;
+    return _AutoLogin.withAutoLogin;
   }
 });
 
-var _withLoginForm = require('./hocs/withLoginForm');
+var _LoginForm = require('./renderProps/LoginForm');
 
+Object.defineProperty(exports, 'LoginForm', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_LoginForm).default;
+  }
+});
 Object.defineProperty(exports, 'withLoginForm', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLoginForm).default;
+    return _LoginForm.withLoginForm;
   }
 });
 
-var _withLoginRequest = require('./hocs/withLoginRequest');
+var _LoginRequest = require('./renderProps/LoginRequest');
 
+Object.defineProperty(exports, 'LoginRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_LoginRequest).default;
+  }
+});
 Object.defineProperty(exports, 'withLoginRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLoginRequest).default;
+    return _LoginRequest.withLoginRequest;
   }
 });
 
-var _withLogoutButton = require('./hocs/withLogoutButton');
+var _LogoutForm = require('./renderProps/LogoutForm');
 
-Object.defineProperty(exports, 'withLogoutButton', {
+Object.defineProperty(exports, 'LogoutForm', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLogoutButton).default;
+    return _interopRequireDefault(_LogoutForm).default;
+  }
+});
+Object.defineProperty(exports, 'withLogoutForm', {
+  enumerable: true,
+  get: function get() {
+    return _LogoutForm.withLogoutForm;
   }
 });
 
-var _withLogoutRequest = require('./hocs/withLogoutRequest');
+var _LogoutRequest = require('./renderProps/LogoutRequest');
 
+Object.defineProperty(exports, 'LogoutRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_LogoutRequest).default;
+  }
+});
 Object.defineProperty(exports, 'withLogoutRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withLogoutRequest).default;
+    return _LogoutRequest.withLogoutRequest;
   }
 });
 
-var _withSignupForm = require('./hocs/withSignupForm');
+var _SignupForm = require('./renderProps/SignupForm');
 
+Object.defineProperty(exports, 'SignupForm', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_SignupForm).default;
+  }
+});
 Object.defineProperty(exports, 'withSignupForm', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withSignupForm).default;
+    return _SignupForm.withSignupForm;
   }
 });
 
-var _withSignupRequest = require('./hocs/withSignupRequest');
+var _SignupRequest = require('./renderProps/SignupRequest');
 
+Object.defineProperty(exports, 'SignupRequest', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_SignupRequest).default;
+  }
+});
 Object.defineProperty(exports, 'withSignupRequest', {
   enumerable: true,
   get: function get() {
-    return _interopRequireDefault(_withSignupRequest).default;
+    return _SignupRequest.withSignupRequest;
   }
 });
 
@@ -220,4 +268,4 @@ exports.default = {
   updateModule: _config2.default.setConfig
 };
 
-// HOCs
+// HOCs and RenderProps

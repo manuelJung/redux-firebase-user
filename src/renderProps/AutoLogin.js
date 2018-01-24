@@ -1,13 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import pt from 'prop-types'
 import { fetchLoginSuccess } from '../actions/login'
 import config from '../config'
 
 
-export default (BaseComponent) => class WithAutoLogin extends React.Component {
-  
+export default class AutoLogin extends React.Component {
+
   static contextTypes = {
-    store: PropTypes.object
+    store: pt.object
+  }
+
+  static propTypes = {
+    render: pt.func
   }
 
   // will be set to false after the request resolves
@@ -21,7 +25,7 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
   hasMounted = false
 
   state = {
-    awaitingResponse: WithAutoLogin.awaitingResponse
+    awaitingResponse: AutoLogin.awaitingResponse
   }
 
   componentWillMount () {
@@ -29,8 +33,8 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
     this.hasMounted  = true
 
     // start request if this is the first instance
-    if(WithAutoLogin.shouldRequest){
-      WithAutoLogin.shouldRequest = false
+    if(AutoLogin.shouldRequest){
+      AutoLogin.shouldRequest = false
       var unsubscribe = config.getConfig().firebase.auth().onAuthStateChanged(user => {
         if (!user) {
           unsubscribe()
@@ -49,25 +53,20 @@ export default (BaseComponent) => class WithAutoLogin extends React.Component {
   }
 
   finnishAutoLogin () {
-    WithAutoLogin.awaitingResponse = false
+    AutoLogin.awaitingResponse = false
 
     // only call setState on a mounted component
     if(this.hasMounted){
       this.setState({ awaitingResponse: false })
     }
   }
-  
-  getInjection () {
-    return {
-      
-      autoLogin: {
-        awaitingResponse: this.state.awaitingResponse
-      }
-    }
-  }
-  
-  render () {
-    var injection = this.getInjection()
-    return <BaseComponent {...injection} {...this.props} />
-  }
+
+  render = () => this.props.render ? this.props.render({...this.state}) : null
+}
+
+export const withAutoLogin = configOrFunc => Component => props => {
+  let config = typeof configOrFunc === 'function' ? configOrFunc(props) : configOrFunc
+  return (
+    <AutoLogin {...config} render={data => <Component {...data} {...props}/>}/>
+  )
 }

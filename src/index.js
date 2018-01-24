@@ -15,16 +15,16 @@ export default {
 }
 
 
-// HOCs
+// HOCs and RenderProps
 
-export { default as withUser } from './hocs/withUser'
-export { default as withAutoLogin } from './hocs/withAutoLogin'
-export { default as withLoginForm } from './hocs/withLoginForm'
-export { default as withLoginRequest } from './hocs/withLoginRequest'
-export { default as withLogoutButton } from './hocs/withLogoutButton'
-export { default as withLogoutRequest } from './hocs/withLogoutRequest'
-export { default as withSignupForm } from './hocs/withSignupForm'
-export { default as withSignupRequest } from './hocs/withSignupRequest'
+export { default as User, withUser } from './renderProps/User'
+export { default as AutoLogin, withAutoLogin } from './renderProps/AutoLogin'
+export { default as LoginForm, withLoginForm } from './renderProps/LoginForm'
+export { default as LoginRequest, withLoginRequest } from './renderProps/LoginRequest'
+export { default as LogoutForm, withLogoutForm } from './renderProps/LogoutForm'
+export { default as LogoutRequest, withLogoutRequest } from './renderProps/LogoutRequest'
+export { default as SignupForm, withSignupForm } from './renderProps/SignupForm'
+export { default as SignupRequest, withSignupRequest } from './renderProps/SignupRequest'
 
 // selectors
 

@@ -52,17 +52,20 @@ function reducer() {
   switch (action.type) {
 
     case t.FETCH_LOGIN_SUCCESS:
-      return _extends({}, updaters.setUser(state, action.payload), {
+      return _extends({}, state, {
+        user: action.payload,
         loginRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
       });
 
     case t.FETCH_LOGOUT_SUCCESS:
-      return _extends({}, updaters.clearUser(state), {
+      return _extends({}, state, {
+        user: null,
         logoutRequest: (0, fromLoginRequest.default)(state.loginRequest, action)
       });
 
     case t.FETCH_SIGNUP_SUCCESS:
-      return _extends({}, updaters.setUser(state, action.payload), {
+      return _extends({}, state, {
+        user: action.payload,
         signupRequest: (0, fromSignupRequest.default)(state.signupRequest, action)
       });
 
