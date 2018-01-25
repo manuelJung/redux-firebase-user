@@ -14,13 +14,13 @@ export default class SignupForm extends React.Component {
   static propTypes = {
     render: pt.func.isRequired,
     initialPassword: pt.string,
-    initialUsername: pt.string
+    initialMail: pt.string
   }
 
   unsubscribeStore = null
 
   state = {
-    username: this.props.initialUsername || '',
+    mail: this.props.initialMail || '',
     password: this.props.initialPassword || ''
   }
   
@@ -42,21 +42,21 @@ export default class SignupForm extends React.Component {
   getRenderProps(){
     const state = this.context.store.getState()
     const dispatch = this.context.store.dispatch
-    const {username, password} = this.state
+    const {mail, password} = this.state
 
-    const signup = () => dispatch(signupAction(username, password))
+    const signup = () => dispatch(signupAction(mail, password))
 
     return {
       signup        : signup,
-      clearForm     : () => this.setState({ username: '', password: ''}),
+      clearForm     : () => this.setState({ mail: '', password: ''}),
       clearPassword : () => this.setState({ password: ''}),
 
       isFetching : isFetchingSignup(state),
       fetchError : getSignupFetchError(state),
 
       emailInput: {
-        value: username,
-        onChange: e => this.setState({ username: e.target.value }),
+        value: mail,
+        onChange: e => this.setState({ mail: e.target.value }),
         placeholder: 'E-Mail',
         type: 'text'
       },
