@@ -109,8 +109,7 @@ AutoLogin.contextTypes = {
   store: _propTypes2.default.object
 };
 AutoLogin.propTypes = {
-  render: _propTypes2.default.func
-};
+  render: _propTypes2.default.func };
 AutoLogin.awaitingResponse = true;
 AutoLogin.shouldRequest = true;
 exports.default = AutoLogin;

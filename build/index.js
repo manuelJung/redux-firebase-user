@@ -261,6 +261,7 @@ var actions = exports.actions = fromActions;
 exports.default = {
   initializeModule: _config2.default.setConfig,
   updateModule: _config2.default.setConfig
-};
 
-// HOCs and RenderProps
+  // HOCs and RenderProps
+
+};
