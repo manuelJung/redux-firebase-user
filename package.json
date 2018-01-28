@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel src -d build",
-    "test": "tape -r babel-register src/**/*.spec.js src/**/**/*.spec.js | tap-spec",
+    "test": "echo 'no tests yet'",
     "prepublish": "npm run build",
     "release": "np"
   },
