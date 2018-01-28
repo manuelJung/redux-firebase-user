@@ -9,8 +9,8 @@ var facebookVector = "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.
 
 
 export const FacebookAuthOButton = ({
-  loginRequest: { isFetching },
-  loginRequestActions: { loginWithFacebook },
+  isFetching,
+  loginWithFacebook,
   background,
   color,
   size,
@@ -30,18 +30,12 @@ export const FacebookAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginRequest(FacebookAuthOButton)
+export default withLoginRequest()(FacebookAuthOButton)
 
 FacebookAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: PropTypes.shape({
-    isFetching: PropTypes.bool.isRequired
-  }).isRequired,
-  
-  // injected by LoginRequest
-  loginRequestActions: PropTypes.shape({
-    loginWithFacebook: PropTypes.func.isRequired
-  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  loginWithFacebook: PropTypes.func.isRequired,
   
   // background of button => css color
   // default: #29487D (facebook blue)

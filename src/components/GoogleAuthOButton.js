@@ -12,8 +12,8 @@ var googleVector = "M179.7 237.6L179.7 284.2 256.7 284.2C253.6 304.2 233.4 342.9
 
 
 export const GoogleAuthOButton = ({
-  loginRequest: { isFetching },
-  loginRequestActions: { loginWithGoogle },
+  isFetching,
+  loginWithGoogle,
   background,
   color,
   size,
@@ -33,18 +33,12 @@ export const GoogleAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginRequest(GoogleAuthOButton)
+export default withLoginRequest()(GoogleAuthOButton)
 
 GoogleAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: PropTypes.shape({
-    isFetching: PropTypes.bool.isRequired
-  }).isRequired,
-  
-  // injected by LoginRequest
-  loginRequestActions: PropTypes.shape({
-    loginWithGoogle: PropTypes.func.isRequired
-  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  loginWithGoogle: PropTypes.func.isRequired,
   
   // background of button => css color
   // default: #db3236 (google red)

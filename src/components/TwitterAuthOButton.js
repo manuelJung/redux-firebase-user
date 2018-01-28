@@ -11,8 +11,8 @@ var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.
 
 
 export const TwitterAuthOButton = ({
-  loginRequest: { isFetching },
-  loginRequestActions: { loginWithTwitter },
+  isFetching,
+  loginWithTwitter,
   background,
   color,
   size,
@@ -32,18 +32,12 @@ export const TwitterAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginRequest(TwitterAuthOButton)
+export default withLoginRequest()(TwitterAuthOButton)
 
 TwitterAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: PropTypes.shape({
-    isFetching: PropTypes.bool.isRequired
-  }).isRequired,
-  
-  // injected by LoginRequest
-  loginRequestActions: PropTypes.shape({
-    loginWithTwitter: PropTypes.func.isRequired
-  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  loginWithTwitter: PropTypes.func.isRequired,
   
   // background of button => css color
   // default: #00ACED (twitter blue)

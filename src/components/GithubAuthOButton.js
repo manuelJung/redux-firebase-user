@@ -13,8 +13,8 @@ var githubVector = "M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 
 
 
 export const GoogleAuthOButton = ({
-  loginRequest: { isFetching },
-  loginRequestActions: { loginWithGithub },
+  isFetching,
+  loginWithGithub,
   background,
   color,
   size,
@@ -34,18 +34,12 @@ export const GoogleAuthOButton = ({
   </AbstractAuthOButton>
 )
 
-export default withLoginRequest(GoogleAuthOButton)
+export default withLoginRequest()(GoogleAuthOButton)
 
 GoogleAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: PropTypes.shape({
-    isFetching: PropTypes.bool.isRequired
-  }).isRequired,
-  
-  // injected by LoginRequest
-  loginRequestActions: PropTypes.shape({
-    loginWithGithub: PropTypes.func.isRequired
-  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  loginWithGithub: PropTypes.func.isRequired,
   
   // background of button => css color
   // default: #24292E (github black)
