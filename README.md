@@ -1,13 +1,12 @@
 # redux-firebase-user
-This is a truely modular redux module, which handles authentication with firebase and react. It is not production ready!
-Api will change heavily until v1.0.0
+This is a truely modular redux module, which handles authentication with firebase and react. The goal of this module is to make authentication with firebase trivial. You can set up a whole signup process within minutes without worrying about state.
 
 This Module exports the following
+  - **RenderProps**: RenderProps inject behaviour within a local scope
   - **HOCs**: Higher ordered components, which inject behaviour in the wrapped React-Components
   - **Components**: Normal React-Components which interact with the reducer state
   - **Selectors**: Selectors for requesting the reducer state
   - **ActionTypes**: All the action types, the reducer uses
-  - **Updaters**: Updaters are used to allow communication to other modules
   - **Actions**: Dispatchable actions are used to modify the reducer state
   - **Configuration** Singleton: A singleton in order to customize the module
 
@@ -21,24 +20,22 @@ $ npm i -S redux-firebase-user
 <!-- TOC -->
 
 - [redux-firebase-user](#redux-firebase-user)
-    - [Install](#install)
-    - [Table of Contents](#table-of-contents)
-    - [Setup](#setup)
-    - [HOCs](#hocs)
-        - [withLoginForm](#withloginform)
-        - [withAutoLogin](#withautologin)
-        - [withSignupForm](#withsignupform)
-        - [withLogoutButton](#withlogoutbutton)
-        - [withLoginRequest](#withloginrequest)
-        - [withLogoutRequest](#withlogoutrequest)
-        - [withSignupRequest](#withsignuprequest)
-    - [Components](#components)
-        - [AuthOButtons](#authobuttons)
-    - [Selectors](#selectors)
-    - [ActionTypes](#actiontypes)
-    - [Updaters](#updaters)
-    - [Actions](#actions)
-    - [Configuration](#configuration)
+  - [Install](#install)
+  - [Table of Contents](#table-of-contents)
+  - [Setup](#setup)
+  - [HOCs and RenderProps](#hocs-and-renderprops)
+    - [withLoginForm & LoginForm](#withloginform--loginform)
+    - [withLoginRequest & LoginRequest](#withloginrequest--loginrequest)
+    - [withSignupForm & SignupForm](#withsignupform--signupform)
+    - [withSignupRequest & SignupRequest](#withsignuprequest--signuprequest)
+    - [withLogoutForm & LogoutForm](#withlogoutform--logoutform)
+    - [withLogoutRequest & LogoutRequest](#withlogoutrequest--logoutrequest)
+    - [withUser & User](#withuser--user)
+  - [Components](#components)
+    - [AuthOButtons](#authobuttons)
+  - [Selectors](#selectors)
+  - [ActionTypes](#actiontypes)
+  - [Actions](#actions)
 
 <!-- /TOC -->
 
@@ -68,44 +65,84 @@ const reducer = combineReducers(reducers)
 const store = createStore(reducer)
 ```
 
-## HOCs
+## HOCs and RenderProps
 
-HOCs are the preferred way to interact with the reducer state. HOCs inject behavior in the wrapped React-Component.
-The main purpose of HOCs is, to make the component creation as easy and flexible as possible. Every logic how to interact with the reducer state
-and how to update it, is sitting in a HOC. Your only task is, to build the component construct and inject the behaviour of the HOC. 
-This gives you the full power of styling and customizable without injecting a big complexity
+This module provides two ways to interact with the state on component level. One way is the usage of [hocs](https://reactjs.org/docs/higher-order-components.html) the other way is the usage of [RenderProps](https://reactjs.org/docs/render-props.html). Both technics tackle very similar problems and it's up to you, which way you prefer.
 
-### withLoginForm
+Here HOCs and RenderProps provide the same api. Every attribute a RenderProp Component can also be set in the configuation object of the hoc.
+Example:
 
-this hoc provides functions and component props for a login form component
+```javascript
+import {withSearchForm, SearchForm} from 'redux-firebase-user'
+
+// HOC
+const ComponentWithHoc = withSearchForm({
+  initialMail: 'user@example.com',
+  initialPassword: 'password'
+})(Component)
+
+// you have also access to props:
+const ComponentWithHoc = withSearchForm(props => ({
+  initialMail: props.mail,
+  initialPassword: props.password
+}))(Component)
+
+// RenderProp
+const RenderPropComponent = () => (
+  <div>
+    <h1>Render Prop Component</h1>
+    <SearchForm 
+      initialMail='user@example.com'
+      initialPassword='password'
+      render={form => (
+        <div>{/* your code with local scope */}</div>
+      )}
+    />
+  <div>
+)
+```
+
+Generally I would suggest to use a HOC, when the wrapped component is only build for this specific usecase, and to use a RenderProp in all other situations, because hocs can prevent [prop collisions](https://hackernoon.com/solving-the-problems-of-higher-order-components-without-throwing-the-baby-out-with-the-bathwater-40ddc72df5aa)
+
+
+
+### withLoginForm & LoginForm
+
+this RenderProp (HOC) provide functions and component props for a login form component. It has an internal state to manage the login credentials. 
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
+| initialMail | string | the mail the login form will be initialized with | 
+| initialPassword | string | the password the login form will be initialized with |
 
 **api**
 
-| name           | type   | injection                | explanation                                              |
-|----------------|--------|--------------------------|----------------------------------------------------------|
-| emailInput     | props  | props.loginFormComponent | input props for the email-input (value, onChange, placeholder, type) |
-| passwordInput  | props  | props.loginFormComponent | input props for the password-input (value, onChange, placeholder, type) |
-| submitInput    | props  | props.loginFormComponent | input props for the submit-input (onClick, type, value) |
-| submitButton   | props  | props.loginFormComponent | button props for the submit-button (onClick) |
-| clearForm      | action | props.loginFormActions   | () => clears password and email input |
-| clearPasssword | action | props.loginFormActions   | () => clears password input |
-| login          | action | props.loginFormActions   | () => fetch login by current value of email and password input |
-| isFetching     | prop   | props.loginForm          | bool; true if login request is currently performing |
-| fetchFailed    | prop   | props.loginForm          | bool; true if last login request failed |
-| fetchError     | prop   | props.loginForm          | { code: string, message: string }; holds an error if the last request failed |
+| name           | type   | description                                              |
+|----------------|--------|----------------------------------------------------------|
+| login          | func   | `login()` logs the user in with the mail and password within the form |
+| clearForm      | func   | `clearForm()` clears mail and password from the inner state |
+| clearPassword  | func   | `clearPassword()` clears only the password from the inner state |
+| isFetching     | bool   | whether or not the login response is fetched |
+| fetchError     | obj or null | holds the error object, if an error occoured during login |
+| emailInput     | props  | `<input {...emailInput}/>` props to manage an email input |
+| passwordInput  | props  | `<input {...passwordInput}/>` props to manage an password input |
+| submitInput    | props  | `<input {...submitInput}/>` props to manage the form submit input |
+| form           | props  | `<form {...form}/>` props to manage the wrapping from. performs login request when submitted |
+
 
 **usage**
 
 ```javascript
 import React from 'react'
-import { withLoginForm } from 'redux-firebase-user'
+import { withLoginForm, LoginForm } from 'redux-firebase-user'
 
+// HOC
 
-export const LoginForm = ({
-  loginFormComponents: { emailInput, passwordInput, submitInput },
-  loginForm: { isFetching, fetchFailed, fetchError }
-}) => (
-  <div>
+const Component = ({ form, emailInput, passwordInput, submitInput, fetchError }) => (
+  <form {...form}>
     {/* every logic of how to interact with the state is handled by the injected component props 
         Nevertheless you can alway overwrite the default props by simply adding the jsx props*/}
     <input {...emailInput} placeholder='my placeholder'/><br/>
@@ -113,224 +150,453 @@ export const LoginForm = ({
     <input {...submitInput} />
     {
       // if the last request fails, an error will be displayed here
-      fetchFailed && <div>{ fetchError.message }</div>
+      fetchError && <div>{ fetchError.message }</div>
     }
+  </form>
+)
+
+const ComponentWithLoginForm = withLoginForm({
+  initialMail: 'user@example.com'
+})(Component)
+
+//alternatively you have access to the passed props:
+
+const ComponentWithLoginForm = withLoginForm(props => ({
+  initialMail: props.mail
+}))(Component)
+
+// RenderProp
+
+const Component = () => (
+  <div>
+    <h1>Login Form</h1>
+    <LoginForm initialMail='user@example.com' render={form => (
+      <form {...form.form}>
+        <input {...form.emailInput}/><br/>
+        <input {...form.passwordInput} /><br/>
+        <input {...form.submitInput} />
+        {form.etchError && <div>{ form.fetchError.message }</div>}
+      </form>
+    )}/>
   </div>
 )
 
-export default withLoginForm(LoginForm)
 ```
 
-### withAutoLogin
+### withLoginRequest & LoginRequest
 
-this hoc is responsible for auto login a user. When at least one component is wrapped with this hoc then the user will be auto logged in (if the user was logged in when he left the website on the previous session)
+An alternative component to LoginForm without the component props but with authO login methods. Handles the login process
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
 
 **api**
 
-| name           | type   | injection                | explanation                                              |
-|----------------|--------|--------------------------|----------------------------------------------------------|
-| awaitingResponse   | props  | props.autoLogin | true, if auto login is currently performing |
+| name              | type   | description                                              |
+|-------------------|--------|----------------------------------------------------------|
+| login             | func   | `login(mail, password)` logs the user in with the mail and password within the form |
+| loginWithGoogle   | func   | `loginWithGoogle()` authO login for Google. will open a popup to login |
+| loginWithFacebook | func   | `loginWithFacebook()` authO login for Facebook. will open a popup to login |
+| loginWithGithub   | func   | `loginWithGithub()` authO login for Github. will open a popup to login |
+| loginWithTwitter  | func   | `loginWithTwitter()` authO login for Twitter. will open a popup to login |
+| loginWithGoogle   | func   | `loginWithGoogle()` authO login for Google. will open a popup to login |
+| fetchError        | obj or null | holds the error object, if an error occoured during login |
+| isFetching        | bool   | whether or not the login response is fetched |
 
 **usage**
 
 ```javascript
 import React from 'react'
-import { withAutoLogin } from 'redux-firebase-user'
+import { withLoginRequest, LoginRequest } from 'redux-firebase-user'
 
+// HOC
 
-export const AppWrapper = (
-  autoLogin: { awaitingResponse }
-}) => (
-  <div>
-    {
-      awaitingResponse
-        ? <div>waiting for login...</div>
-        : <App/>
-    }
-  </div>
-)
+class Component extends React.Component {
+  state = { mail: '', pwd: '' }
 
-export default withAutoLogin(AppWrapper)
+  updateMail = e => this.setState({mail: e.target.value})
+  updatePwd  = e => this.setState({pwd: e.target.value})
+
+  render(){
+    let {mail, pwd} = this.state
+    let {login, fetchError} = this.props
+
+    return (
+      <form onSubmit={() => login(mail, pwd)}>
+        <input type='text' value={mail} onChange={this.updateMail}/>
+        <input type='password' value={pwd} onChange={this.updatePwd}/>
+        <button>submit</button>
+        {
+          // if the last request fails, an error will be displayed here
+          fetchError && <div>{ fetchError.message }</div>
+        }
+      </form>
+    )
+  }
+}
+
+const ComponentWithLoginRequest = withLoginRequest()(Component)
+
+// RenderProp
+
+class Component extends React.Component {
+  state = { mail: '', pwd: '' }
+
+  updateMail = e => this.setState({mail: e.target.value})
+  updatePwd  = e => this.setState({pwd: e.target.value})
+
+  render(){
+    let {mail, pwd} = this.state
+
+    return (
+      <div>
+        <h1>Login Form</h1>
+        <LoginRequest render={req => (
+          <form onSubmit={() => req.login(mail, pwd)}>
+            <input type='text' value={mail} onChange={this.updateMail}/>
+            <input type='password' value={pwd} onChange={this.updatePwd}/>
+            <button>submit</button>
+            {
+              // if the last request fails, an error will be displayed here
+              req.fetchError && <div>{ req.fetchError.message }</div>
+            }
+          </form>
+        )}/>
+      </div>
+    )
+  }
+}
+
 ```
 
 
+### withSignupForm & SignupForm
 
-### withSignupForm
+this RenderProp (HOC) provide functions and component props for a signup form component. It has an internal state to manage the signup credentials. 
 
-this hoc provides functions and component props for a signup form component (TODO: add custom properties)
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
+| initialMail | string | the mail the signup form will be initialized with | 
+| initialPassword | string | the password the signup form will be initialized with |
 
 **api**
 
-| name           | type   | injection                | explanation                                              |
-|----------------|--------|--------------------------|----------------------------------------------------------|
-| emailInput     | props  | props.signupFormComponent | input props for the email-input (value, onChange, placeholder, type) |
-| passwordInput  | props  | props.signupFormComponent | input props for the password-input (value, onChange, placeholder, type) |
-| submitInput    | props  | props.signupFormComponent | input props for the submit-input (onClick, type, value) |
-| submitButton   | props  | props.signupFormComponent | button props for the submit-button (onClick) |
-| clearForm      | action | props.signupFormActions   | () => clears password and email input |
-| clearPasssword | action | props.signupFormActions   | () => clears password input |
-| signup         | action | props.signupFormActions   | () => fetch signup by current value of email and password input |
-| isFetching     | prop   | props.signupForm          | bool; true if signup request is currently performing |
-| fetchFailed    | prop   | props.signupForm          | bool; true if last signup request failed |
-| fetchError     | prop   | props.signupForm          | { code: string, message: string }; holds an error if the last request failed |
+| name           | type   | description                                              |
+|----------------|--------|----------------------------------------------------------|
+| signup          | func   | `signup()` signs the user up with the mail and password within the form |
+| clearForm      | func   | `clearForm()` clears mail and password from the inner state |
+| clearPassword  | func   | `clearPassword()` clears only the password from the inner state |
+| isFetching     | bool   | whether or not the signup response is fetched |
+| fetchError     | obj or null | holds the error object, if an error occoured during signup |
+| emailInput     | props  | `<input {...emailInput}/>` props to manage an email input |
+| passwordInput  | props  | `<input {...passwordInput}/>` props to manage an password input |
+| submitInput    | props  | `<input {...submitInput}/>` props to manage the form submit input |
+| form           | props  | `<form {...form}/>` props to manage the wrapping from. performs signup request when submitted |
+
 
 **usage**
 
 ```javascript
 import React from 'react'
-import { withSignupForm } from 'redux-firebase-user'
+import { withSignupForm, SignupForm } from 'redux-firebase-user'
 
-export const SignupForm = ({
-  signupFormComponents: { emailInput, passwordInput, submitInput },
-  signupForm: { isFetching, fetchFailed, fetchError }
-}) => (
-  <div>
-    <input {...emailInput} /><br/>
+// HOC
+
+const Component = ({ form, emailInput, passwordInput, submitInput, fetchError }) => (
+  <form {...form}>
+    {/* every logic of how to interact with the state is handled by the injected component props 
+        Nevertheless you can alway overwrite the default props by simply adding the jsx props*/}
+    <input {...emailInput} placeholder='my placeholder'/><br/>
     <input {...passwordInput} /><br/>
     <input {...submitInput} />
     {
-      fetchFailed && <div>{ fetchError.message }</div>
+      // if the last request fails, an error will be displayed here
+      fetchError && <div>{ fetchError.message }</div>
     }
+  </form>
+)
+
+const ComponentWithSignupForm = withSignupForm({
+  initialMail: 'user@example.com'
+})(Component)
+
+//alternative you have access to the passed props:
+
+const ComponentWithSignupForm = withSignupForm(props => ({
+  initialMail: props.mail
+}))(Component)
+
+// RenderProp
+
+const Component = () => (
+  <div>
+    <h1>Signup Form</h1>
+    <SignupForm initialMail='user@example.com' render={form => (
+      <form {...form.form}>
+        <input {...form.emailInput}/><br/>
+        <input {...form.passwordInput} /><br/>
+        <input {...form.submitInput} />
+        {form.etchError && <div>{ form.fetchError.message }</div>}
+      </form>
+    )}/>
   </div>
 )
 
-export default withSignupForm(SignupForm)
 ```
 
-### withLogoutButton
 
-this hoc provides functions and component props for a logout button. Is nearly the same as the withLogoutRequest hoc, but with a button which perform a logout on click
+### withSignupRequest & SignupRequest
+
+An alternative component to SignupForm without the component props. Handles the signup process
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
 
 **api**
 
-| name           | type   | injection                | explanation                                              |
-|----------------|--------|--------------------------|----------------------------------------------------------|
-| logoutButton   | props  | props.logoutButtonComponents | input props for a logout button (onClick) |
-| logout         | action | props.logoutButtonActions    | () =>  logs user out |
-| isFetching     | prop   | props.logoutButton           | bool; true if logout request is currently performing |
-| fetchFailed    | prop   | props.logoutButton           | bool; true if last logout request failed |
-| fetchError     | prop   | props.logoutButton           | { code: string, message: string }; holds an error if the last request failed |
+| name              | type   | description                                              |
+|-------------------|--------|----------------------------------------------------------|
+| signup            | func   | `signup(mail, password)` signs the user up with the mail and password within the form |
+| fetchError        | obj or null | holds the error object, if an error occoured during signup |
+| isFetching        | bool   | whether or not the signup response is fetched |
+
+**usage**
+
+```javascript
+import React from 'react'
+import { withSignupRequest, SignupRequest } from 'redux-firebase-user'
+
+// HOC
+
+class Component extends React.Component {
+  state = { mail: '', pwd: '' }
+
+  updateMail = e => this.setState({mail: e.target.value})
+  updatePwd  = e => this.setState({pwd: e.target.value})
+
+  render(){
+    let {mail, pwd} = this.state
+    let {login, fetchError} = this.props
+
+    return (
+      <form onSubmit={() => login(mail, pwd)}>
+        <input type='text' value={mail} onChange={this.updateMail}/>
+        <input type='password' value={pwd} onChange={this.updatePwd}/>
+        <button>submit</button>
+        {
+          // if the last request fails, an error will be displayed here
+          fetchError && <div>{ fetchError.message }</div>
+        }
+      </form>
+    )
+  }
+}
+
+const ComponentWithSignupRequest = withSignupRequest()(Component)
+
+// RenderProp
+
+class Component extends React.Component {
+  state = { mail: '', pwd: '' }
+
+  updateMail = e => this.setState({mail: e.target.value})
+  updatePwd  = e => this.setState({pwd: e.target.value})
+
+  render(){
+    let {mail, pwd} = this.state
+
+    return (
+      <div>
+        <h1>Signup Form</h1>
+        <SignupRequest render={req => (
+          <form onSubmit={() => req.login(mail, pwd)}>
+            <input type='text' value={mail} onChange={this.updateMail}/>
+            <input type='password' value={pwd} onChange={this.updatePwd}/>
+            <button>submit</button>
+            {
+              // if the last request fails, an error will be displayed here
+              req.fetchError && <div>{ req.fetchError.message }</div>
+            }
+          </form>
+        )}/>
+      </div>
+    )
+  }
+}
+
+```
+
+
+### withLogoutForm & LogoutForm
+
+this RenderProp (HOC) provide functions and component props for a login form component. It has an internal state to manage the login credentials. 
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
+
+**api**
+
+| name           | type   | description                                              |
+|----------------|--------|----------------------------------------------------------|
+| logout         | func   | `logout()` logs the user out |
+| isFetching     | bool   | whether or not the logout response is fetched |
+| fetchError     | obj or null | holds the error object, if an error occoured during logout |
+| logoutButton   | props  | `<button {...logoutButton}/>` props to manage an logout button |
 
 
 **usage**
 
 ```javascript
 import React from 'react'
-import { withLogoutButton } from 'redux-firebase-user'
+import { withLogoutForm, LogoutForm } from 'redux-firebase-user'
 
-export const LogoutForm = ({
-  logoutButtonComponents: { logoutButton },
-  logoutButton: { isFetching, fetchFailed, fetchError }
-}) => (
+// HOC
+
+const Component = ({ logoutButton, fetchError }) => (
   <div>
-    <button {...logoutButton}>Logout</button><br/>
+    <button {...logoutButton}>logout</button>
     {
-      fetchFailed && <div>{ fetchError.message }</div>
+      // if the last request fails, an error will be displayed here
+      fetchError && <div>{ fetchError.message }</div>
     }
   </div>
 )
 
-export default withLogoutButton(LogoutForm)
+const ComponentWithLogoutForm = withLogoutForm()(Component)
+
+// RenderProp
+
+const Component = () => (
+  <div>
+    <h1>Logout Form</h1>
+    <LogoutForm render={form => (
+      <div>
+        <button {...logoutButton}>logout</button>
+        {form.etchError && <div>{ form.fetchError.message }</div>}
+      </div>
+    )}/>
+  </div>
+)
+
 ```
 
 
-### withLoginRequest
+### withLogoutRequest & LogoutRequest
 
-this hoc provides functions and props for logging in a user. The hoc withLoginForm does the same, but offers predefined components such as passwordInput or emailInput
+An alternative component to LogoutForm without the component props. Handles the logout process
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
 
 **api**
 
-| name            | type   | injection                | explanation                                              |
-|-----------------|--------|--------------------------|----------------------------------------------------------|
-| login           | action | props.loginRequestActions | (email, password) =>  logs user in |
-| loginWithGoogle | action | props.loginRequestActions | () =>  logs user with google authO in (popup) |
-| isFetching      | prop   | props.loginRequest        | bool; true if login request is currently performing |
-| fetchFailed     | prop   | props.loginRequest        | bool; true if last login request failed |
-| fetchError      | prop   | props.loginRequest        | { code: string, message: string }; holds an error if the last request failed |
+| name              | type   | description                                              |
+|-------------------|--------|----------------------------------------------------------|
+| logout            | func   | `signup(mail, password)` loggs the user out |
+| fetchError        | obj or null | holds the error object, if an error occoured during logout |
+| isFetching        | bool   | whether or not the logout response is fetched |
 
-**request**
+**usage**
 
 ```javascript
 import React from 'react'
-import { withLoginRequest } from 'redux-firebase-user'
+import { withLogoutRequest, LogoutRequest } from 'redux-firebase-user'
 
-export const LoginForm = ({
-  loginRequest: { isFetching, fetchFailed, fetchError },
-  loginRequestActions: { loginWithGoogle }
-}) => (
-  <div>
-    <button onClick={loginWithGoogle}>Login with Google</button>
-    {
-      fetchFailed && <div>{ fetchError.message }</div>
-    }
-  </div>
+// 
+
+const Component = ({logout}) => (
+  <button onClick={logout}>logout</button>
 )
 
-export default withLoginRequest(LoginForm)
+
+const ComponentWithLogoutRequest = withLogoutRequest()(Component)
+
+// RenderProp
+
+const Component = () => (
+  <LogoutRequest render={req => (
+    <button onClick={req.logout}>logout</button>
+  )}/>
+)
+
 ```
 
 
-### withLogoutRequest
+### withUser & User
 
-this hoc provides functions and props for logging out a user
+This RenderProp (hoc) injects user data and can tell whether or not the user is logged in
+
+**props**
+
+| name            | type   | description                                                                                                                            |
+|-----------------|--------|----------------------------------------------------------------------------------------------------------------------------------------|
+| render          | func   | required only for render props. cb to render the component. all atributes listed below in the api will be given as parameter to the cb |
 
 **api**
 
-| name            | type   | injection                | explanation                                              |
-|-----------------|--------|--------------------------|----------------------------------------------------------|
-| logout          | action | props.logoutRequestActions | (email, password) =>  logs user out |
-| isFetching      | prop   | props.logoutRequest        | bool; true if logout request is currently performing |
-| fetchFailed     | prop   | props.logoutRequest        | bool; true if last logout request failed |
-| fetchError      | prop   | props.logoutRequest        | { code: string, message: string }; holds an error if the last request failed |
+| name              | type   | description                                              |
+|-------------------|--------|----------------------------------------------------------|
+| profile           | object or null | holds the user object from firebase |
+| isLoggedIn        | bool   | whether or not the user is logged in |
 
-**request**
+**usage**
 
 ```javascript
 import React from 'react'
-import { withLogoutRequest } from 'redux-firebase-user'
+import { withUser, User } from 'redux-firebase-user'
 
-export const LogoutForm = ({
-  logoutRequest: { isFetching, fetchFailed, fetchError },
-  logoutRequestActions: { logout }
-}) => (
+// 
+
+const Component = ({isLoggedIn, profile}) => (
   <div>
-    <button onClick={logout}>Logout</button>
-    {
-      fetchFailed && <div>{ fetchError.message }</div>
-    }
+    <div>logged in: {isLoggedIn ? 'yes' : 'no'}</div>
+    <div>user id: {profile && profile.uid}</div>
   </div>
 )
 
-export default withLogoutRequest(LogoutForm)
-```
 
+const ComponentWithLogoutRequest = withUser()(Component)
 
-### withSignupRequest
+// RenderProp
 
-this hoc provides functions and props for signing up a user. Not working yet
-
-**api**
-
-| name            | type   | injection                | explanation                                              |
-|-----------------|--------|--------------------------|----------------------------------------------------------|
-| signup          | action | props.signupRequestActions | (email, password) =>  signs a user up |
-| isFetching      | prop   | props.signupRequest        | bool; true if signup request is currently performing |
-| fetchFailed     | prop   | props.signupRequest        | bool; true if last signup request failed |
-| fetchError      | prop   | props.signupRequest        | { code: string, message: string }; holds an error if the last request failed |
-
-**request**
-
-```javascript
+const Component = () => (
+  <div>
+    <h1>User Stats</h1>
+    <User render={user => (
+      <div>
+        <div>logged in: {user.isLoggedIn ? 'yes' : 'no'}</div>
+        <div>user id: {user.profile && user.profile.uid}</div>
+      </div>
+    )}/>
+  </div>
+)
 
 ```
+
+
+
 
 
 ## Components
 
 ### AuthOButtons
 
-Currently the only AuthO Login method implemented is the Google AuthO method. 
-This will change soon. The following AuthO button components are provided:
+The following AuthO button components are provided:
 
   - GoogleAuthOButton
   - FacebookAuthOButton
@@ -431,10 +697,31 @@ export default function countReducer = (state = 0, action) {
 }
 ```
 
-
-## Updaters
-
 ## Actions
 
-## Configuration
+```javascript
+import { login, logout, signup } from 'redux-firebase-user'
+import { 
+  loginWithGoogle, 
+  loginWithFacebook, 
+  loginWithGithub, 
+  loginWithTwitter 
+} from 'redux-firebase-user'
+
+// login user
+dispatch(login('user@example.com', 'password'))
+
+// logout user
+dispatch(logout())
+
+// signup user
+dispatch(signup('user@example.com', 'password'))
+
+// authO login
+dispatch(loginWithGoogle())
+dispatch(loginWithFacebook())
+dispatch(loginWithGithub())
+dispatch(loginWithTwitter())
+
+```
 
