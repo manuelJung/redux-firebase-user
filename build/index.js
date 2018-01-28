@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TwitterAuthOButton = exports.FacebookAuthOButton = exports.GoogleAuthOButton = exports.GithubAuthOButton = exports.getSignupFetchError = exports.signupFetchFailed = exports.isFetchingSignup = exports.getLogoutFetchError = exports.logoutFetchFailed = exports.isFetchingLogout = exports.getLoginFetchError = exports.loginFetchFailed = exports.isFetchingLogin = exports.isLoggedIn = exports.getUser = exports.withSignupRequest = exports.SignupRequest = exports.withSignupForm = exports.SignupForm = exports.withLogoutRequest = exports.LogoutRequest = exports.withLogoutForm = exports.LogoutForm = exports.withLoginRequest = exports.LoginRequest = exports.withLoginForm = exports.LoginForm = exports.withAutoLogin = exports.AutoLogin = exports.withUser = exports.User = exports.updaters = exports.actions = exports.actionTypes = exports.reducer = undefined;
+exports.TwitterAuthOButton = exports.FacebookAuthOButton = exports.GoogleAuthOButton = exports.GithubAuthOButton = exports.getSignupFetchError = exports.signupFetchFailed = exports.isFetchingSignup = exports.getLogoutFetchError = exports.logoutFetchFailed = exports.isFetchingLogout = exports.getLoginFetchError = exports.loginFetchFailed = exports.isFetchingLogin = exports.isLoggedIn = exports.getUser = exports.withSignupRequest = exports.SignupRequest = exports.withSignupForm = exports.SignupForm = exports.withLogoutRequest = exports.LogoutRequest = exports.withLogoutForm = exports.LogoutForm = exports.withLoginRequest = exports.LoginRequest = exports.withLoginForm = exports.LoginForm = exports.withAutoLogin = exports.AutoLogin = exports.withUser = exports.User = exports.actions = exports.actionTypes = exports.reducer = undefined;
 
 var _reducer = require('./reducer');
 
@@ -247,10 +247,6 @@ var _actions = require('./actions');
 
 var fromActions = _interopRequireWildcard(_actions);
 
-var _updaters = require('./updaters');
-
-var fromUpdaters = _interopRequireWildcard(_updaters);
-
 var _config = require('./config');
 
 var _config2 = _interopRequireDefault(_config);
@@ -261,7 +257,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var actionTypes = exports.actionTypes = fromActionTypes;
 var actions = exports.actions = fromActions;
-var updaters = exports.updaters = fromUpdaters;
 
 exports.default = {
   initializeModule: _config2.default.setConfig,

@@ -1,13 +1,11 @@
 import * as fromActionTypes from './actionTypes'
 import * as fromActions from './actions'
-import * as fromUpdaters from './updaters'
 import config from './config'
 
 export { default as reducer } from './reducer'
 
 export const actionTypes = fromActionTypes
 export const actions     = fromActions
-export const updaters    = fromUpdaters
 
 export default {
   initializeModule : config.setConfig,

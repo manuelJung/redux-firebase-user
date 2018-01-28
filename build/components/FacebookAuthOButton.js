@@ -30,13 +30,13 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var facebookVector = "M211.9 197.4h-36.7v59.9h36.7V433.1h70.5V256.5h49.2l5.2-59.1h-54.4c0 0 0-22.1 0-33.7 0-13.9 2.8-19" + ".5 16.3-19.5 10.9 0 38.2 0 38.2 0V82.9c0 0-40.2 0-48.8 0 -52.5 0-76.1 23.1-76.1 67.3C211.9 188.8 " + "211.9 197.4 211.9 197.4z";
 
 var FacebookAuthOButton = function FacebookAuthOButton(_ref) {
-  var isFetching = _ref.loginRequest.isFetching,
-      loginWithFacebook = _ref.loginRequestActions.loginWithFacebook,
+  var isFetching = _ref.isFetching,
+      loginWithFacebook = _ref.loginWithFacebook,
       background = _ref.background,
       color = _ref.color,
       size = _ref.size,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ['loginRequest', 'loginRequestActions', 'background', 'color', 'size', 'children']);
+      rest = _objectWithoutProperties(_ref, ['isFetching', 'loginWithFacebook', 'background', 'color', 'size', 'children']);
 
   return _react2.default.createElement(
     _AbstractAuthOButton2.default,
@@ -55,19 +55,13 @@ var FacebookAuthOButton = function FacebookAuthOButton(_ref) {
 };
 
 exports.FacebookAuthOButton = FacebookAuthOButton;
-exports.default = (0, _withLoginRequest2.default)(FacebookAuthOButton);
+exports.default = (0, _withLoginRequest2.default)()(FacebookAuthOButton);
 
 
 FacebookAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: _propTypes2.default.shape({
-    isFetching: _propTypes2.default.bool.isRequired
-  }).isRequired,
-
-  // injected by LoginRequest
-  loginRequestActions: _propTypes2.default.shape({
-    loginWithFacebook: _propTypes2.default.func.isRequired
-  }).isRequired,
+  isFetching: _propTypes2.default.bool.isRequired,
+  loginWithFacebook: _propTypes2.default.func.isRequired,
 
   // background of button => css color
   // default: #29487D (facebook blue)

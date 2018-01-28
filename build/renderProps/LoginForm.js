@@ -50,7 +50,7 @@ var LoginForm = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call.apply(_ref, [this].concat(args))), _this), _this.unsubscribeStore = null, _this.state = {
-      username: _this.props.initialUsername || '',
+      mail: _this.props.initialMail || '',
       password: _this.props.initialPassword || ''
     }, _this.render = function () {
       return _this.props.render(_this.getRenderProps());
@@ -83,18 +83,18 @@ var LoginForm = function (_React$Component) {
       var state = this.context.store.getState();
       var dispatch = this.context.store.dispatch;
       var _state = this.state,
-          username = _state.username,
+          mail = _state.mail,
           password = _state.password;
 
 
       var login = function login() {
-        return dispatch((0, _actions.login)(username, password));
+        return dispatch((0, _actions.login)(mail, password));
       };
 
       return {
         login: login,
         clearForm: function clearForm() {
-          return _this2.setState({ username: '', password: '' });
+          return _this2.setState({ mail: '', password: '' });
         },
         clearPassword: function clearPassword() {
           return _this2.setState({ password: '' });
@@ -104,9 +104,9 @@ var LoginForm = function (_React$Component) {
         fetchError: (0, _selectors.getLoginFetchError)(state),
 
         emailInput: {
-          value: username,
+          value: mail,
           onChange: function onChange(e) {
-            return _this2.setState({ username: e.target.value });
+            return _this2.setState({ mail: e.target.value });
           },
           placeholder: 'E-Mail',
           type: 'text'
@@ -142,7 +142,7 @@ LoginForm.contextTypes = {
 LoginForm.propTypes = {
   render: _propTypes2.default.func.isRequired,
   initialPassword: _propTypes2.default.string,
-  initialUsername: _propTypes2.default.string
+  initialMail: _propTypes2.default.string
 };
 exports.default = LoginForm;
 var withLoginForm = exports.withLoginForm = function withLoginForm(configOrFunc) {

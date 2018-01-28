@@ -30,13 +30,13 @@ function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in ob
 var twitterVector = "M419.6 168.6c-11.7 5.2-24.2 8.7-37.4 10.2 13.4-8.1 23.8-20.8 28.6-36 -12.6 7.5-26.5 12.9-41.3 15" + ".8 -11.9-12.6-28.8-20.6-47.5-20.6 -42 0-72.9 39.2-63.4 79.9 -54.1-2.7-102.1-28.6-134.2-68 -17 29" + ".2-8.8 67.5 20.1 86.9 -10.7-0.3-20.7-3.3-29.5-8.1 -0.7 30.2 20.9 58.4 52.2 64.6 -9.2 2.5-19.2 3." + "1-29.4 1.1 8.3 25.9 32.3 44.7 60.8 45.2 -27.4 21.4-61.8 31-96.4 27 28.8 18.5 63 29.2 99.8 29.2 1" + "20.8 0 189.1-102.1 185-193.6C399.9 193.1 410.9 181.7 419.6 168.6z";
 
 var TwitterAuthOButton = function TwitterAuthOButton(_ref) {
-  var isFetching = _ref.loginRequest.isFetching,
-      loginWithTwitter = _ref.loginRequestActions.loginWithTwitter,
+  var isFetching = _ref.isFetching,
+      loginWithTwitter = _ref.loginWithTwitter,
       background = _ref.background,
       color = _ref.color,
       size = _ref.size,
       children = _ref.children,
-      rest = _objectWithoutProperties(_ref, ['loginRequest', 'loginRequestActions', 'background', 'color', 'size', 'children']);
+      rest = _objectWithoutProperties(_ref, ['isFetching', 'loginWithTwitter', 'background', 'color', 'size', 'children']);
 
   return _react2.default.createElement(
     _AbstractAuthOButton2.default,
@@ -55,19 +55,13 @@ var TwitterAuthOButton = function TwitterAuthOButton(_ref) {
 };
 
 exports.TwitterAuthOButton = TwitterAuthOButton;
-exports.default = (0, _withLoginRequest2.default)(TwitterAuthOButton);
+exports.default = (0, _withLoginRequest2.default)()(TwitterAuthOButton);
 
 
 TwitterAuthOButton.propTypes = {
   // injected by LoginRequest
-  loginRequest: _propTypes2.default.shape({
-    isFetching: _propTypes2.default.bool.isRequired
-  }).isRequired,
-
-  // injected by LoginRequest
-  loginRequestActions: _propTypes2.default.shape({
-    loginWithTwitter: _propTypes2.default.func.isRequired
-  }).isRequired,
+  isFetching: _propTypes2.default.bool.isRequired,
+  loginWithTwitter: _propTypes2.default.func.isRequired,
 
   // background of button => css color
   // default: #00ACED (twitter blue)
