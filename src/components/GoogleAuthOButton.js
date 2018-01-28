@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AbstractAuthOButton from './AbstractAuthOButton'
-import withLoginRequest from '../hocs/withLoginRequest'
+import {withLoginRequest} from '../renderProps/LoginRequest'
 
 var googleVector = "M179.7 237.6L179.7 284.2 256.7 284.2C253.6 304.2 233.4 342.9 179.7 342.9 133.4 342.9 95.6 304.4 "
                  + "95.6 257 95.6 209.6 133.4 171.1 179.7 171.1 206.1 171.1 223.7 182.4 233.8 192.1L270.6 156.6C247 "

@@ -19,9 +19,7 @@ var _AbstractAuthOButton = require('./AbstractAuthOButton');
 
 var _AbstractAuthOButton2 = _interopRequireDefault(_AbstractAuthOButton);
 
-var _withLoginRequest = require('../hocs/withLoginRequest');
-
-var _withLoginRequest2 = _interopRequireDefault(_withLoginRequest);
+var _LoginRequest = require('../renderProps/LoginRequest');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55,7 +53,7 @@ var FacebookAuthOButton = function FacebookAuthOButton(_ref) {
 };
 
 exports.FacebookAuthOButton = FacebookAuthOButton;
-exports.default = (0, _withLoginRequest2.default)()(FacebookAuthOButton);
+exports.default = (0, _LoginRequest.withLoginRequest)()(FacebookAuthOButton);
 
 
 FacebookAuthOButton.propTypes = {
