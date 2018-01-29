@@ -102,7 +102,7 @@ const RenderPropComponent = () => (
 )
 ```
 
-Generally I would suggest to use a HOC, when the wrapped component is only build for this specific usecase, and to use a RenderProp in all other situations, because hocs can prevent [prop collisions](https://hackernoon.com/solving-the-problems-of-higher-order-components-without-throwing-the-baby-out-with-the-bathwater-40ddc72df5aa)
+Generally I would suggest to use a HOC, when the wrapped component is only build for this specific usecase, and to use a RenderProp in all other situations, because RenderProps can prevent [prop collisions](https://hackernoon.com/solving-the-problems-of-higher-order-components-without-throwing-the-baby-out-with-the-bathwater-40ddc72df5aa)
 
 
 
